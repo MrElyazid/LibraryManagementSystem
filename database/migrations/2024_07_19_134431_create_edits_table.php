@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('id_operation');
             $table->unsignedBigInteger('book');
             $table->unsignedBigInteger('librarian');
-            $table->date('operation date');
+            $table->date('operation_date')->nullable(false);
             $table->timestamps();
 
             $table->foreign('book')->references('id_book')->on('books')->onDelete('no action');

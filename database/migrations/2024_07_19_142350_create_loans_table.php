@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id('id_loan');
             $table->unsignedBigInteger('book');
             $table->unsignedBigInteger('client');
-            $table->date('date_borrowed');
-            $table->date('due_date');
+            $table->date('date_borrowed')->nullable(false);
+            $table->date('due_date')->nullable(false);
             $table->date('return_date')->nullable();
 
             $table->unique(['book','client']);

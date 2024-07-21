@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('librarians', function (Blueprint $table) {
             $table->id('id_librarian');
-            $table->string('name');
-            $table->string('lastname');
-            $table->string('phone_number');
-            $table->string('password');
-            $table->string('email');
+            $table->string('name')->nullable(false);
+            $table->string('lastname')->nullable(false);
+            $table->string('phone_number')->nullable(false);
+            $table->string('password')->nullable(false);
+            $table->string('email')->nullable(false);
             $table->timestamps();
         });
     }

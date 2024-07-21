@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('id_wishlist');
             $table->unsignedBigInteger('book');
             $table->unsignedBigInteger('client');
-            $table->date('date_added');
+            $table->date('date_added')->nullable(false);
             $table->unique(['book','client']);
 
             $table->foreign('book')->references('id_book')->on('books')->onDelete('no action');

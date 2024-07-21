@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('images', function (Blueprint $table) {
             $table->id('id_image');
-            $table->set('type',['Author', 'Category', 'Cover']);
-            $table->string('path');
+            $table->set('type', ['Author', 'Category', 'Cover'])->nullable(false);
+            $table->string('path')->nullable(false);
             $table->timestamps();
         });
     }

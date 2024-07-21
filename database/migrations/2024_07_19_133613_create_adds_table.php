@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id('id_operation');
             $table->unsignedBigInteger('book');
             $table->unsignedBigInteger('librarian');
-            $table->bigInteger('addes_qty');
-            $table->date('operation date');
+            $table->bigInteger('added_qty')->nullable(false);
+            $table->date('operation_date')->nullable(false);
             $table->timestamps();
 
 
