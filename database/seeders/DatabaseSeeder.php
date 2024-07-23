@@ -10,7 +10,6 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
 
-        // Seed Images
         $imageIds = [];
         for ($i = 0; $i < 10; $i++) {
             $typeArray = ['Author', 'Category', 'Cover'];
@@ -25,8 +24,6 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-
-        // Seed Categories
         $categoryIds = [];
         for ($i = 0; $i < 5; $i++) {
             $categoryIds[] = DB::table('categories')->insertGetId([
@@ -38,7 +35,6 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        // Seed Authors
         $authorIds = [];
         for ($i = 0; $i < 5; $i++) {
             $authorIds[] = DB::table('authors')->insertGetId([
