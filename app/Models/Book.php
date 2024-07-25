@@ -1,7 +1,5 @@
 <?php
 
-// app/Models/Book.php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,13 +12,7 @@ class Book extends Model
     protected $primaryKey = 'id_book';
 
     protected $fillable = [
-        'isbn',
-        'title',
-        'category',
-        'status',
-        'quantity',
-        'image', // This is the foreign key to the images table
-        'author',
+        'isbn', 'title', 'category', 'status', 'quantity', 'image', 'author', 'description'
     ];
 
     public function category()
@@ -28,13 +20,13 @@ class Book extends Model
         return $this->belongsTo(Category::class, 'category', 'id_category');
     }
 
-    public function imagePic()
-    {
-        return $this->belongsTo(Image::class, 'image', 'id_image'); // Correct relationship
-    }
-
     public function author()
     {
         return $this->belongsTo(Author::class, 'author', 'id_author');
+    }
+
+    public function getImagePathAttribute()
+    {
+        return $this->image ? 'storage/images/covers/' . $this->image : 'storage/images/covers/default-image.jpg';
     }
 }

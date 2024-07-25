@@ -1,7 +1,5 @@
 <?php
 
-// app/Http/Controllers/BookController.php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -11,17 +9,20 @@ use App\Models\Author;
 class BookController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     */
+    * Display a listing of the resource.
+    */
     public function index()
     {
-        // Load the default Books view without any search results
-        return view('books');
+        // Fetch the latest books (adjust the logic as necessary)
+        $latestBooks = Book::with('imagePic')->latest()->limit(12)->get(); // Fetch the latest 12 books
+
+        return view('books', compact('latestBooks'));
     }
 
     /**
-     * Perform a search for books by title or author name.
-     */
+    * Perform a search for books by title or author name.
+    */
+
     public function search(Request $request)
     {
         $query = $request->input('query');
@@ -36,4 +37,11 @@ class BookController extends Controller
         // Return the view with the search results
         return view('books', compact('books'));
     }
+
+    public function show($id)
+    {
+        $book = Book::with(['author', 'category'])->findOrFail($id);
+        return view('book', compact('book'));
+    }
+    
 }

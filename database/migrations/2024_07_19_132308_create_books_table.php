@@ -18,17 +18,13 @@ return new class extends Migration
             $table->unsignedBigInteger('category');
             $table->set('status', ['Available','Coming Soon', 'Not Available'])->nullable(false);
             $table->bigInteger('quantity')->nullable(false);
-            $table->unsignedBigInteger('image');
+            $table->string('image')->nullable();
             $table->unsignedBigInteger('author');
+            $table->text('description')->nullable(false);
 
             $table->foreign('category')
                   ->references('id_category')
                   ->on('categories')
-                  ->onDelete('no action');
-
-            $table->foreign('image')
-                  ->references('id_image')
-                  ->on('images')
                   ->onDelete('no action');
             
             $table->foreign('author')

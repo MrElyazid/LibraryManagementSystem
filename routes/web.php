@@ -1,9 +1,10 @@
 <?php
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BookController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\ProfileController;
-
 Route::get('/', function () {
     return view('home');
 });
@@ -18,11 +19,12 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 
 Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
+Route::get('/authors', [AuthorController::class, 'fetchAuthors'])->name('authors.fetch');
 
-
-// routes/web.php
-
-use App\Http\Controllers\BookController;
 
 Route::get('/books', [BookController::class, 'index'])->name('books.index');
 Route::get('/books/search', [BookController::class, 'search'])->name('books.search');
+Route::get('/authors', [AuthorController::class, 'index'])->name('authors.index');
+
+
+Route::get('/book/{id}', [BookController::class, 'show']);

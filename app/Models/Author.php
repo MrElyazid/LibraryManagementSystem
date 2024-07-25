@@ -12,11 +12,7 @@ class Author extends Model
     protected $primaryKey = 'id_author';
 
     protected $fillable = [
-        'name',
-        'lastname',
-        'birth_date',
-        'description',
-        'image',
+        'name', 'lastname', 'birth_date', 'description', 'image'
     ];
 
     public function books()
@@ -24,8 +20,8 @@ class Author extends Model
         return $this->hasMany(Book::class, 'author', 'id_author');
     }
 
-    public function image()
+    public function getImagePathAttribute()
     {
-        return $this->belongsTo(Image::class, 'image', 'id_image');
+        return $this->image ? 'storage/images/authors/' . $this->image : 'storage/images/authors/default-image.jpg';
     }
 }

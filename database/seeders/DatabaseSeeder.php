@@ -10,64 +10,60 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
 
-        $imageIds = [];
-        for ($i = 0; $i < 10; $i++) {
-            $typeArray = ['Author', 'Category', 'Cover'];
-            $typeKey = array_rand($typeArray);
-            $type = $typeArray[$typeKey];
+       // List of image filenames
+       $imageIds = [
+        'image0.jpg',
+        'image1.jpg',
+        'image2.jpg',
+        'image3.jpg',
+        'image4.jpg'
+    ];
 
-            $imageIds[] = DB::table('images')->insertGetId([
-                'type' => $type,
-                'path' => 'images/image' . $i . '.jpg', // Only the relative path is needed
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
-        }
+    // Seed Categories
+    $categoryIds = [];
+    for ($i = 0; $i < 5; $i++) {
+        $categoryIds[] = DB::table('categories')->insertGetId([
+            'name' => 'Category' . $i,
+            'description' => 'Description for category ' . $i,
+            'image' => $imageIds[array_rand($imageIds)],
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+    }
 
-        $categoryIds = [];
-        for ($i = 0; $i < 5; $i++) {
-            $categoryIds[] = DB::table('categories')->insertGetId([
-                'name' => 'Category' . $i,
-                'description' => 'Description for category ' . $i,
-                'image' => $imageIds[array_rand($imageIds)],
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
-        }
+    // Seed Authors
+    $authorIds = [];
+    for ($i = 0; $i < 5; $i++) {
+        $authorIds[] = DB::table('authors')->insertGetId([
+            'name' => 'Author' . $i,
+            'lastname' => 'Lastname' . $i,
+            'birth_date' => Carbon::create(rand(1950, 2000), rand(1, 12), rand(1, 28)),
+            'description' => 'Description for author ' . $i,
+             'image' => $imageIds[array_rand($imageIds)],
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+    }
 
-        $authorIds = [];
-        for ($i = 0; $i < 5; $i++) {
-            $authorIds[] = DB::table('authors')->insertGetId([
-                'name' => 'Author' . $i,
-                'lastname' => 'Lastname' . $i,
-                'birth_date' => Carbon::create(rand(1950, 2000), rand(1, 12), rand(1, 28)),
-                'description' => 'Description for author ' . $i,
-                'image' => rand(0, 1) ? $imageIds[array_rand($imageIds)] : null,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
-        }
 
-            // Seed Books
-            $bookIds = [];
-            for ($i = 0; $i < 10; $i++) {
-                $statusArray = ['Available', 'Coming Soon', 'Not Available'];
-                $statusKey = array_rand($statusArray);
-                $status = $statusArray[$statusKey];
-
-                $bookIds[] = DB::table('books')->insertGetId([
-                    'isbn' => Str::random(13),
-                    'title' => 'Book Title ' . $i,
-                    'category' => $categoryIds[array_rand($categoryIds)],
-                    'status' => $status,
-                    'quantity' => rand(1, 10),
-                    'image' => $imageIds[array_rand($imageIds)],
-                    'author' => $authorIds[array_rand($authorIds)],
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]);
-            }
-
+    // Seed Books
+    $statusArray = ['Available', 'Coming Soon', 'Not Available'];
+    $bookIds = [];
+    for ($i = 0; $i < 10; $i++) {
+        $status = $statusArray[array_rand($statusArray)];
+        $bookIds[] = DB::table('books')->insertGetId([
+            'isbn' => Str::random(13),
+            'title' => 'Book Title ' . $i,
+            'category' => $categoryIds[array_rand($categoryIds)],
+            'description' => 'Description for book ' . $i,
+            'status' => $status,
+            'quantity' => rand(1, 10),
+            'image' => $imageIds[array_rand($imageIds)],
+            'author' => $authorIds[array_rand($authorIds)],
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+    }
 
         // Seed Clients
         $clientIds = [];
@@ -82,7 +78,6 @@ class DatabaseSeeder extends Seeder
                 'updated_at' => now(),
             ]);
         }
-
 
         // Seed Librarians
         $librarianIds = [];

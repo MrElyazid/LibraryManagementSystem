@@ -100,6 +100,7 @@
         @include('components.navbar')
     @endif 
 
+    @include('components.connectedNavbar')
     <section class="hero-section">
         <div class="hero-content text-center text-white">
             <h1 class="display-3">Ohara Library</h1>
@@ -114,38 +115,39 @@
         <h2 class="mb-4">Latest Books</h2>
         <div id="latestBooksCarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
-                @foreach($latestBooks->chunk(4) as $key => $bookChunk)
+                @foreach($latestBooks as $key => $book)
                     <div class="carousel-item @if($key === 0) active @endif">
-                        <div class="d-flex justify-content-around">
-                            @foreach($bookChunk as $book)
-                                <div class="card" style="width: 232px;">
-                                    <img src="{{ asset($book->image_path) }}" class="card-img-top" style="width: 232px; height: 320px; object-fit: cover;" alt="{{ $book->title }}">
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{ $book->title }}</h5>
-                                        <p class="card-text">Status: {{ $book->status }}</p>
-                                        <p class="card-text">Quantity: {{ $book->quantity }}</p>
-                                    </div>
-                                </div>
-                            @endforeach
+                        <div class="row">
+                            <div class="col-md-3">
+                                @if ($book->imagePic)
+                                    <img src="{{ asset('storage/'. $book->imagePic->path) }}" class="d-block w-100" alt="{{ $book->title }}">
+                                @else
+                                    <img src="{{ asset('storage/images/default-image.jpg') }}" class="d-block w-100" alt="Default Image">
+                                @endif
+                            </div>
+                            <div class="col-md-9">
+                                <h3>{{ $book->title }}</h3>
+                                <p>Status: {{ $book->status }}</p>
+                                <p>Quantity: {{ $book->quantity }}</p>
+                            </div>
                         </div>
                     </div>
                 @endforeach
             </div>
+
             <button class="carousel-control-prev" type="button" data-bs-target="#latestBooksCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" style="background-color: #000;" aria-hidden="true"></span>
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
             </button>
             <button class="carousel-control-next" type="button" data-bs-target="#latestBooksCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" style="background-color: #000;" aria-hidden="true"></span>
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
     </div>
-    
+
     @yield('content')
-    
-    
-    
+
     <section id="how-it-works" class="py-5 bg-light">
         <div class="container">
             <h2 class="text-center mb-4">How Our Site Works</h2>

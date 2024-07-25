@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,41 +11,43 @@
     <style>
 
     .hero-section {
-        background: url('{{ asset('images/ohara_background.jpg') }}') no-repeat center center;
-        background-size: cover;
-        height: 45vh; /* 45% of the screen height */
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+            background: url('{{ asset('images/ohara_background.jpg') }}') no-repeat center center;
+            background-size: cover;
+            height: 45vh; /* 45% of the screen height */
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
     }
 
     .hero-content {
-        background-color: rgba(0, 0, 0, 0.5); /* Adding a dark layer for better text visibility */
-        padding: 20px;
-        border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.5); /* Adding a dark layer for better text visibility */
+    padding: 20px;
+    border-radius: 10px;
     }
 
     .carousel-item {
-        padding: 20px 0; /* Add some spacing around the items */
+    padding: 20px 0; /* Add some spacing around the items */
     }
 
     .carousel-inner {
-        display: flex;
-        align-items: center;
+    display: flex;
+    align
+    display: flex;
+    align-items: center;
     }
 
     .carousel-item img {
-        height: 200px;
-        object-fit: cover;
+    height: 200px;
+    object-fit: cover;
     }
 
     .carousel-item h3 {
-        margin-top: 0;
+    margin-top: 0;
     }
 
     .carousel-item p {
-        margin-bottom: 0;
+    margin-bottom: 0;
     }
 
     #how-it-works {
@@ -78,8 +79,8 @@
     }
 
     .card {
-        display: flex;
-        flex-direction: column;
+    display: flex;
+    flex-direction: column;
     }
 
     .card-body {
@@ -93,13 +94,14 @@
     </style>
 </head>
 <body>
-   
+{{--     
     @if(Auth::check())
         @include('components.connectedNavbar')
     @else
         @include('components.navbar')
-    @endif 
+    @endif --}}
 
+    @include('components.connectedNavbar')
     <section class="hero-section">
         <div class="hero-content text-center text-white">
             <h1 class="display-3">Ohara Library</h1>
@@ -114,42 +116,47 @@
         <h2 class="mb-4">Latest Books</h2>
         <div id="latestBooksCarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
-                @foreach($latestBooks->chunk(4) as $key => $bookChunk)
+                @foreach($latestBooks as $key => $book)
                     <div class="carousel-item @if($key === 0) active @endif">
-                        <div class="d-flex justify-content-around">
-                            @foreach($bookChunk as $book)
-                                <div class="card" style="width: 232px;">
-                                    <img src="{{ asset($book->image_path) }}" class="card-img-top" style="width: 232px; height: 320px; object-fit: cover;" alt="{{ $book->title }}">
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{ $book->title }}</h5>
-                                        <p class="card-text">Status: {{ $book->status }}</p>
-                                        <p class="card-text">Quantity: {{ $book->quantity }}</p>
-                                    </div>
-                                </div>
-                            @endforeach
+                        <div class="row">
+                            <div class="col-md-3">
+                                @if ($book->imagePic)
+                                    <img src="{{ asset('storage/' . $book->imagePic->path) }}" class="d-block w-100" alt="{{ $book->title }}">
+                                @else
+                                    <img src="{{ asset('storage/images/default-image.jpg') }}" class="d-block w-100" alt="Default Image">
+                                @endif
+                            </div>
+                            <div class="col-md-9">
+                                <h3>{{ $book->title }}</h3>
+                                <p>Status: {{ $book->status }}</p>
+                                <p>Quantity: {{ $book->quantity }}</p>
+                            </div>
                         </div>
                     </div>
                 @endforeach
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#latestBooksCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" style="background-color: #000;" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#latestBooksCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" style="background-color: #000;" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
         </div>
     </div>
     
-    @yield('content')
+            <button class="carousel-control-prev" type="button" data-bs-target="#latestBooksCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#latestBooksCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+        @yield('content')
+    </div>
     
-    
+
     
     <section id="how-it-works" class="py-5 bg-light">
         <div class="container">
             <h2 class="text-center mb-4">How Our Site Works</h2>
-
+    
             <div class="row mb-5">
                 <div class="col-md-4 d-flex align-items-stretch text-center">
                     <div class="card border-0 shadow-sm w-100">
@@ -160,7 +167,7 @@
                         </div>
                     </div>
                 </div>
-
+    
                 <div class="col-md-4 d-flex align-items-stretch text-center">
                     <div class="card border-0 shadow-sm w-100">
                         <div class="card-body d-flex flex-column">
@@ -170,7 +177,7 @@
                         </div>
                     </div>
                 </div>
-
+    
                 <div class="col-md-4 d-flex align-items-stretch text-center">
                     <div class="card border-0 shadow-sm w-100">
                         <div class="card-body d-flex flex-column">
@@ -189,6 +196,7 @@
             </div>
         </div>
     </section>
+    
 
 </body>
 </html>

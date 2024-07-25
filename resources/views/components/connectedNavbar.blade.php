@@ -30,7 +30,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="">
                         <i class="bi bi-heart"></i> Wishlist
                     </a>
                 </li>
@@ -45,11 +45,11 @@
 <!-- Custom CSS for navbar styling -->
 <style>
     .navbar-brand img {
-        transition: transform 0.2s ease-in-out;
+        transition: transform 0.2s ease-in-out !important;
     }
 
     .navbar-brand img:hover {
-        transform: scale(1.1);
+        transform: scale(1.1) !important;
     }
 
     .nav-item .nav-link {
