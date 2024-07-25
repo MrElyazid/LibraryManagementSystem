@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Book;
 use App\Models\Author;
+use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
 {
@@ -14,7 +15,7 @@ class BookController extends Controller
     public function index()
     {
         // Fetch the latest books (adjust the logic as necessary)
-        $latestBooks = Book::with('imagePic')->latest()->limit(12)->get(); // Fetch the latest 12 books
+        $latestBooks = Book::with('image')->latest()->limit(12)->get(); // Fetch the latest 12 books
 
         return view('books', compact('latestBooks'));
     }
@@ -39,9 +40,25 @@ class BookController extends Controller
     }
 
     public function show($id)
-    {
-        $book = Book::with(['author', 'category'])->findOrFail($id);
-        return view('book', compact('book'));
+{
+    // Raw SQL query to get the book data along with author and category details
+    $book = DB::select("
+        SELECT books.*, authors.name as author_name, authors.birth_date as author_birth_date, categories.name as category_name
+        FROM books
+        LEFT JOIN authors ON books.author = authors.id_author
+        LEFT JOIN categories ON books.category = categories.id_category
+        WHERE books.id_book = ?
+    ", [$id]);
+
+    // Ensure you get the first result since `DB::select` returns an array
+    if (!empty($book)) {
+        $book = $book[0];
+    } else {
+        abort(404, 'Book not found');
     }
+
+    return view('book', compact('book'));
+}
+
     
 }

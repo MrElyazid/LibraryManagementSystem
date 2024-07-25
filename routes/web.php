@@ -1,10 +1,14 @@
 <?php
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CategoryController;
+
+
 Route::get('/', function () {
     return view('home');
 });
@@ -28,3 +32,11 @@ Route::get('/authors', [AuthorController::class, 'index'])->name('authors.index'
 
 
 Route::get('/book/{id}', [BookController::class, 'show']);
+
+Route::post('/logout', function () {
+    Auth::logout();
+    return redirect('/login');
+})->name('logout');
+
+
+Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');

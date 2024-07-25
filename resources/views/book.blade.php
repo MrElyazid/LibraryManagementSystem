@@ -56,7 +56,6 @@ body {
 <body>
 @include('components.connectedNavbar')
 <div class="main-container">
-    <!-- First Horizontal Container -->
     <div class="first-container">
         <div class="book-cover-container">
             <img src="{{ $book->image }}" alt="Book Cover" class="book-cover">
@@ -65,17 +64,16 @@ body {
         </div>
         <div class="book-info-container">
             <h2>{{ $book->title }}</h2>
-            <p>Author: {{ $book->author->name ?? 'Unknown' }}</p>
-            <p>Category: {{ $book->category->name ?? 'Unknown' }}</p>
+            <p>Author: {{ $book->author_name ?? 'Unknown' }}</p>
+            <p>Category: {{ $book->category_name ?? 'Unknown' }}</p>
             <p>Year of Publish: {{ date('Y', strtotime($book->created_at)) }}</p>
         </div>
     </div>
-    <!-- Second Horizontal Container -->
     <div class="second-container">
         <div class="author-info">
             <h3>Author Info</h3>
-            <p>Name: {{ $book->author->name ?? 'Unknown' }}</p>
-            <p>Birth Date: {{ optional($book->author)->birth_date ?? 'Unknown' }}</p>
+            <p>Name: {{ $book->author_name ?? 'Unknown' }}</p>
+            <p>Birth Date: {{ $book->author_birth_date ?? 'Unknown' }}</p>
         </div>
         <div class="book-description">
             <h3>Description</h3>
@@ -85,3 +83,4 @@ body {
 </div>
 </body>
 </html>
+
