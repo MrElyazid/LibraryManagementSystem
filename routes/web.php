@@ -9,10 +9,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 
 
-Route::get('/', function () {
-    return view('home');
-});
-
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
@@ -31,7 +28,8 @@ Route::get('/books/search', [BookController::class, 'search'])->name('books.sear
 Route::get('/authors', [AuthorController::class, 'index'])->name('authors.index');
 
 
-Route::get('/book/{id}', [BookController::class, 'show']);
+Route::get('/books/{id}', [BookController::class, 'show'])->name('books.show');
+
 
 Route::post('/logout', function () {
     Auth::logout();

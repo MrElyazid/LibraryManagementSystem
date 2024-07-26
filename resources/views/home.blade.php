@@ -114,7 +114,7 @@
         <h2 class="mb-4">Latest Books</h2>
         <div id="latestBooksCarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
-                @foreach($latestBooks->chunk(4) as $key => $bookChunk)
+                @foreach($latestBooks->chunk(3) as $key => $bookChunk)
                     <div class="carousel-item @if($key === 0) active @endif">
                         <div class="d-flex justify-content-around">
                             @foreach($bookChunk as $book)

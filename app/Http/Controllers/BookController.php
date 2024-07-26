@@ -14,11 +14,12 @@ class BookController extends Controller
     */
     public function index()
     {
-        // Fetch the latest books (adjust the logic as necessary)
-        $latestBooks = Book::with('image')->latest()->limit(12)->get(); // Fetch the latest 12 books
-
+        // Fetch the latest books
+        $latestBooks = Book::latest()->limit(12)->get(); // Fetch the latest 12 books
+    
         return view('books', compact('latestBooks'));
     }
+    
 
     /**
     * Perform a search for books by title or author name.

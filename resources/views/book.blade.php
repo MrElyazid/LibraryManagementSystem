@@ -11,71 +11,97 @@
 <style>
 body {
     font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
 }
 .main-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 20px;
+    padding: 20px;
 }
 .first-container, .second-container {
     display: flex;
     width: 80%;
     margin-bottom: 20px;
+    background: white;
+    box-shadow: 0 4px 8px rgba(0,0,0,.1);
+    border-radius: 10px;
+    padding: 20px;
 }
 .book-cover-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 40%;
+    padding: 20px;
 }
 .book-cover {
-    width: 80%;
-    margin-bottom: 10px;
+    width: 100%;
+    max-width: 150px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,.1);
 }
 .loan-button, .wishlist-button {
-    display: block;
-    width: 80%;
+    width: 100%;
     margin: 5px 0;
+    padding: 10px;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+}
+.loan-button {
+    background-color: #007bff;
+    color: white;
+}
+.loan-button:hover {
+    background-color: #0056b3;
+}
+.wishlist-button {
+    background-color: #28a745;
+    color: white;
+}
+.wishlist-button:hover {
+    background-color: #218838;
 }
 .book-info-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     width: 60%;
-    padding-left: 20px;
-    border-left: 1px solid #ccc;
+    padding: 0 20px;
+    border-left: 1px solid #eee;
 }
 .author-info, .book-description {
-    width: 50%;
+    flex: 1;
     padding: 20px;
-    box-sizing: border-box;
+}
+.author-info h3, .book-description h3 {
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
 }
 </style>
 </head>
 <body>
 @include('components.connectedNavbar')
-<div class="main-container">
-    <div class="first-container">
-        <div class="book-cover-container">
-            <img src="{{ $book->image }}" alt="Book Cover" class="book-cover">
-            <button class="loan-button">Loan</button>
-            <button class="wishlist-button">Wishlist</button>
+<div class="container main-container">
+    <div class="row first-container">
+        <div class="col-md-4 book-cover-container">
+            <img src="{{ asset('storage/images/covers/' . $book->image) }}" alt="Book Cover" class="book-cover img-fluid">
+            <button class="loan-button btn btn-primary mt-3">Loan</button>
+            <button class="wishlist-button btn btn-success mt-2">Wishlist</button>
         </div>
-        <div class="book-info-container">
+        <div class="col-md-8 book-info-container">
             <h2>{{ $book->title }}</h2>
-            <p>Author: {{ $book->author_name ?? 'Unknown' }}</p>
-            <p>Category: {{ $book->category_name ?? 'Unknown' }}</p>
-            <p>Year of Publish: {{ date('Y', strtotime($book->created_at)) }}</p>
+            <p><strong>Author:</strong> {{ $book->author_name ?? 'Unknown' }}</p>
+            <p><strong>Category:</strong> {{ $book->category_name ?? 'Unknown' }}</p>
+            <p><strong>Year of Publish:</strong> {{ date('Y', strtotime($book->created_at)) }}</p>
         </div>
     </div>
-    <div class="second-container">
-        <div class="author-info">
+    <div class="row second-container">
+        <div class="col-md-6 author-info">
             <h3>Author Info</h3>
-            <p>Name: {{ $book->author_name ?? 'Unknown' }}</p>
-            <p>Birth Date: {{ $book->author_birth_date ?? 'Unknown' }}</p>
+            <p><strong>Name:</strong> {{ $book->author_name ?? 'Unknown' }}</p>
+            <p><strong>Birth Date:</strong> {{ $book->author_birth_date ?? 'Unknown' }}</p>
         </div>
-        <div class="book-description">
+        <div class="col-md-6 book-description">
             <h3>Description</h3>
             <p>{{ $book->description ?? 'No description available.' }}</p>
         </div>

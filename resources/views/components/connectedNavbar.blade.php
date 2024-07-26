@@ -1,7 +1,7 @@
 <!-- resources/views/components/connected-navbar.blade.php -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="{{ route('home')}}">
             <img src="{{ asset('images/brand.png') }}" alt="Brand" style="height: 50px;"> <!-- Adjusted height -->
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavConnected" aria-controls="navbarNavConnected" aria-expanded="false" aria-label="Toggle navigation">
@@ -10,17 +10,17 @@
         <div class="collapse navbar-collapse" id="navbarNavConnected">
             <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="{{ route('books.index') }}">
                         <i class="bi bi-book"></i> Books
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="{{ route('categories.index') }}">
                         <i class="bi bi-card-list"></i> Categories
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="{{ route('authors.index') }}">
                         <i class="bi bi-people"></i> Authors
                     </a>
                 </li>
