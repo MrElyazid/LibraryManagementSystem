@@ -39,4 +39,5 @@
 
 ## ER diagram : 
 
-![[readmeassets/Mld_diagram.png]]
+![ER Diagram](readmeassets/Mld_diagram.png)
+
