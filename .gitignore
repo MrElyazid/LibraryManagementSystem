@@ -5,6 +5,7 @@
 /public/storage
 /storage/*.key
 /vendor
+/readmeassets
 .env
 .env.backup
 .env.production
