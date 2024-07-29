@@ -55,25 +55,35 @@
     </style>
 </head>
 <body>
-    @include('components.connectedNavbar')
+    
+
+    @if(Auth::check())
+    @if(Auth::user()->isLibrarian())
+        @include('components.libnav')
+    @else
+        @include('components.connectedNavbar')
+    @endif
+@else
+    @include('components.navbar')
+@endif
+
+
 
     <div class="container mt-4">
         <h2 class="mb-4 text-primary">Authors</h2>
 
-        <!-- Search Form -->
-        <form action="{{ route('authors.index') }}" method="GET" class="mb-4">
-            <div class="row g-2">
-                <div class="col-md-5">
-                    <input type="text" name="name" class="form-control" placeholder="First Name" value="{{ request('name') }}">
-                </div>
-                <div class="col-md-5">
-                    <input type="text" name="lastname" class="form-control" placeholder="Last Name" value="{{ request('lastname') }}">
-                </div>
-                <div class="col-md-2">
-                    <button type="submit" class="btn btn-success w-100">Search</button>
-                </div>
-            </div>
-        </form>
+  <!-- Search Form -->
+<form action="{{ route('authors.index') }}" method="GET" class="mb-4">
+    <div class="row g-2">
+        <div class="col-md-10">
+            <input type="text" name="search" class="form-control" placeholder="Author Name or Last Name" value="{{ request('search') }}">
+        </div>
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-success w-100">Search</button>
+        </div>
+    </div>
+</form>
+
 
         <div class="row">
             @foreach ($authors as $author)

@@ -95,10 +95,14 @@
 <body>
    
     @if(Auth::check())
-        @include('components.connectedNavbar')
+    @if(Auth::user()->isLibrarian())
+        @include('components.libnav')
     @else
-        @include('components.navbar')
-    @endif 
+        @include('components.connectedNavbar')
+    @endif
+@else
+    @include('components.navbar')
+@endif
 
     <section class="hero-section">
         <div class="hero-content text-center text-white">

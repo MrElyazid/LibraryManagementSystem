@@ -17,17 +17,16 @@ class AuthorController extends Controller
     public function index(Request $request)
 {
     $query = Author::query();
-
-    if ($request->filled('name')) {
-        $query->where('name', 'like', '%' . $request->input('name') . '%');
+    if ($request->filled('search')) {
+        $search = $request->input('search');
+        $query->where(function ($query) use ($search) {
+            $query->where('name', 'like', '%' . $search . '%')
+                ->orWhere('lastname', 'like', '%' . $search . '%');
+        });
     }
-
-    if ($request->filled('lastname')) {
-        $query->where('lastname', 'like', '%' . $request->input('lastname') . '%');
-    }
-
     $authors = $query->get();
-
     return view('authors', compact('authors'));
 }
+
+
 }

@@ -21,7 +21,19 @@
     </style>
 </head>
 <body>
-    @include('components.connectedNavbar') <!-- Include common navbar -->
+    
+
+    @if(Auth::check())
+    @if(Auth::user()->isLibrarian())
+        @include('components.libnav')
+    @else
+        @include('components.connectedNavbar')
+    @endif
+@else
+    @include('components.navbar')
+@endif
+
+
 
     <div class="container mt-4">
         <h1 class="mb-4">Categories</h1>

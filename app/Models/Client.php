@@ -3,16 +3,17 @@
 
 namespace App\Models;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Client extends Authenticatable
 {
     use Notifiable;
 
     protected $fillable = [
-        'name', 'lastname', 'email', 'password',
+        'name', 'lastname', 'email', 'password', 'is_student'
     ];
 
     protected $hidden = [
@@ -20,4 +21,14 @@ class Client extends Authenticatable
     ];
 
     protected $primaryKey = 'id_client';
+
+
+    public function isLibrarian()
+    {
+        
+        return DB::table('librarians')
+            ->where('email', $this->email)
+            ->where('password', $this->password)
+            ->exists();
+    }
 }

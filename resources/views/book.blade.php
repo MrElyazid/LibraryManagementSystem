@@ -80,7 +80,20 @@ body {
 </style>
 </head>
 <body>
-@include('components.connectedNavbar')
+
+
+    @if(Auth::check())
+    @if(Auth::user()->isLibrarian())
+        @include('components.libnav')
+    @else
+        @include('components.connectedNavbar')
+    @endif
+@else
+    @include('components.navbar')
+@endif
+
+
+
 <div class="container main-container">
     <div class="row first-container">
         <div class="col-md-4 book-cover-container">

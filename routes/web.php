@@ -4,9 +4,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LoanController;
 use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\LibrarianController;
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -38,3 +41,10 @@ Route::post('/logout', function () {
 
 
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+
+
+
+
+Route::get('/librarian/loans', [LoanController::class, 'index'])->name('librarian.loans');
+Route::get('/librarian/clients', [ClientController::class, 'index'])->name('librarian.clients');
+Route::get('/librarian/dashboard', [LibrarianController::class, 'dashboard'])->name('librarian.dashboard');
