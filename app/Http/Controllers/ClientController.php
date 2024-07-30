@@ -1,23 +1,21 @@
 <?php
 
+
+//app/Http/Controllers/ClientController.php
+
 namespace App\Http\Controllers;
 
 use App\Models\Client;
 use Illuminate\Http\Request;
+use DB;
 
 class ClientController extends Controller
 {
-    /**
-     * Display a listing of the clients.
-     *
-     * 
-     */
     public function index()
     {
-        $clients = Client::all();
+        $clients = Client::withCount('loans')->get();
         return view('librarian.clients', compact('clients'));
     }
-
 
     public function store(Request $request)
     {
@@ -34,5 +32,4 @@ class ClientController extends Controller
 
         return redirect()->route('clients.index');
     }
-
 }

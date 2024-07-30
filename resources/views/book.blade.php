@@ -98,12 +98,12 @@ body {
     <div class="row first-container">
         <div class="col-md-4 book-cover-container">
             <img src="{{ asset('storage/images/covers/' . $book->image) }}" alt="Book Cover" class="book-cover img-fluid">
-            <button class="loan-button btn btn-primary mt-3">Loan</button>
+            <a class="loan-button btn btn-primary mt-3" href="{{ route('loans.create', ['book' => $book->id_book]) }}">Loan</a>
             <button class="wishlist-button btn btn-success mt-2">Wishlist</button>
         </div>
         <div class="col-md-8 book-info-container">
             <h2>{{ $book->title }}</h2>
-            <p><strong>Author:</strong> {{ $book->author_name ?? 'Unknown' }}</p>
+            <p><strong>Author:</strong> {{ $book->author_name . " " . $book->author_lastname ?? 'Unknown' }}</p>
             <p><strong>Category:</strong> {{ $book->category_name ?? 'Unknown' }}</p>
             <p><strong>Year of Publish:</strong> {{ date('Y', strtotime($book->created_at)) }}</p>
         </div>
@@ -111,7 +111,7 @@ body {
     <div class="row second-container">
         <div class="col-md-6 author-info">
             <h3>Author Info</h3>
-            <p><strong>Name:</strong> {{ $book->author_name ?? 'Unknown' }}</p>
+            <p><strong>Name:</strong> {{ $book->author_name . " " . $book->author_lastname ?? 'Unknown' }}</p>
             <p><strong>Birth Date:</strong> {{ $book->author_birth_date ?? 'Unknown' }}</p>
         </div>
         <div class="col-md-6 book-description">

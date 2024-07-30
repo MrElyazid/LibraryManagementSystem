@@ -31,4 +31,9 @@ class Client extends Authenticatable
             ->where('password', $this->password)
             ->exists();
     }
+    public function loans()
+    {
+        return $this->hasMany(Loan::class, 'client', 'id_client');
+    }
+
 }

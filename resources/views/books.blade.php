@@ -61,9 +61,9 @@ h2, h3 {
     @else
         @include('components.connectedNavbar')
     @endif
-@else
-    @include('components.navbar')
-@endif
+    @else
+        @include('components.navbar')
+    @endif
 
 
 
@@ -114,8 +114,8 @@ h2, h3 {
                             <div class="card-body">
                                 <div class="card-body-content">
                                     <h5 class="card-title">{{ $book->title }}</h5>
-                                    <p class="card-text">by {{ optional($book->author)->name }}</p>
-                                    <p class="card-text">Category: {{ optional($book->category)->name }}</p>
+                                    <p class="card-text">by {{ $book->author_name }} {{ $book->author_lastname }}</p>
+                                    <p class="card-text">Category: {{ $book->category_name }}</p>
                                     <p class="card-text">ISBN: {{ $book->isbn }}</p>
                                 </div>
                                 <a href="{{ route('books.show', $book->id_book) }}" class="btn btn-view-details">View Details</a>

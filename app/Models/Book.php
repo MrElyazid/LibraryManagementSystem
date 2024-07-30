@@ -29,4 +29,20 @@ class Book extends Model
     {
         return $this->image ? 'storage/images/covers/' . $this->image : 'storage/images/covers/default-image.jpg';
     }
+
+    public function getAuthorNameAttribute()
+    {
+        return $this->author()->first()->name;
+    }
+    
+    public function getAuthorLastnameAttribute()
+    {
+        return $this->author()->first()->lastname;
+    }
+    
+    public function getCategoryNameAttribute()
+    {
+        return $this->category()->first()->name;
+    }
+
 }

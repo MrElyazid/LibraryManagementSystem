@@ -44,12 +44,13 @@ class BookController extends Controller
 {
     // Raw SQL query to get the book data along with author and category details
     $book = DB::select("
-        SELECT books.*, authors.name as author_name, authors.birth_date as author_birth_date, categories.name as category_name
-        FROM books
-        LEFT JOIN authors ON books.author = authors.id_author
-        LEFT JOIN categories ON books.category = categories.id_category
-        WHERE books.id_book = ?
+    SELECT books.*, authors.name as author_name, authors.lastname as author_lastname, authors.birth_date as author_birth_date, categories.name as category_name
+    FROM books
+    LEFT JOIN authors ON books.author = authors.id_author
+    LEFT JOIN categories ON books.category = categories.id_category
+    WHERE books.id_book = ?
     ", [$id]);
+    
 
     // Ensure you get the first result since `DB::select` returns an array
     if (!empty($book)) {
@@ -61,5 +62,4 @@ class BookController extends Controller
     return view('book', compact('book'));
 }
 
-    
 }
