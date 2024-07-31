@@ -42,7 +42,7 @@ body {
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0,0,0,.1);
 }
-.loan-button, .wishlist-button {
+.loan-button, .wishlist-button, .edit-button, .remove-button {
     width: 100%;
     margin: 5px 0;
     padding: 10px;
@@ -64,6 +64,20 @@ body {
 .wishlist-button:hover {
     background-color: #218838;
 }
+.edit-button {
+    background-color: #ffc107;
+    color: white;
+}
+.edit-button:hover {
+    background-color: #e0a800;
+}
+.remove-button {
+    background-color: #dc3545;
+    color: white;
+}
+.remove-button:hover {
+    background-color: #c82333;
+}
 .book-info-container {
     width: 60%;
     padding: 0 20px;
@@ -80,46 +94,73 @@ body {
 </style>
 </head>
 <body>
-
-
     @if(Auth::check())
-    @if(Auth::user()->isLibrarian())
-        @include('components.libnav')
+        @if(Auth::user()->isLibrarian())
+            @include('components.libnav')
+        @else
+            @include('components.connectedNavbar')
+        @endif
     @else
-        @include('components.connectedNavbar')
+        @include('components.navbar')
     @endif
-@else
-    @include('components.navbar')
-@endif
+    <div class="container main-container">
+        <div class="row first-container">
+            <div class="col-md-4 book-cover-container">
+                <img src="{{ asset('storage/images/covers/' . $book->image) }}" alt="Book Cover" class="book-cover img-fluid">
+                
+                
+                @if(Auth::check() && Auth::user()->isLibrarian())
+                <a class="edit-button btn btn-warning mt-3" href="{{ route('librarian.editBook', ['id' => $book->id_book]) }}">Edit</a>
+                <button type="button" class="remove-button btn btn-danger mt-2" onclick="confirmDelete({{ $book->id_book }})">Remove</button>
+            @else
+                <a class="loan-button btn btn-primary mt-3" href="{{ route('loans.create', ['book' => $book->id_book]) }}">Loan</a>
+                <button class="wishlist-button btn btn-success mt-2">Wishlist</button>
+            @endif
 
 
-
-<div class="container main-container">
-    <div class="row first-container">
-        <div class="col-md-4 book-cover-container">
-            <img src="{{ asset('storage/images/covers/' . $book->image) }}" alt="Book Cover" class="book-cover img-fluid">
-            <a class="loan-button btn btn-primary mt-3" href="{{ route('loans.create', ['book' => $book->id_book]) }}">Loan</a>
-            <button class="wishlist-button btn btn-success mt-2">Wishlist</button>
+            </div>
+            <div class="col-md-8 book-info-container">
+                <h2>{{ $book->title }}</h2>
+                <p><strong>Author:</strong> {{ $book->author_name . " " . $book->author_lastname ?? 'Unknown' }}</p>
+                <p><strong>Category:</strong> {{ $book->category_name ?? 'Unknown' }}</p>
+                <p><strong>Year of Publish:</strong> {{ date('Y', strtotime($book->created_at)) }}</p>
+            </div>
         </div>
-        <div class="col-md-8 book-info-container">
-            <h2>{{ $book->title }}</h2>
-            <p><strong>Author:</strong> {{ $book->author_name . " " . $book->author_lastname ?? 'Unknown' }}</p>
-            <p><strong>Category:</strong> {{ $book->category_name ?? 'Unknown' }}</p>
-            <p><strong>Year of Publish:</strong> {{ date('Y', strtotime($book->created_at)) }}</p>
+        <div class="row second-container">
+            <div class="col-md-6 author-info">
+                <h3>Author Info</h3>
+                <p><strong>Name:</strong> {{ $book->author_name . " " . $book->author_lastname ?? 'Unknown' }}</p>
+                <p><strong>Birth Date:</strong> {{ $book->author_birth_date ?? 'Unknown' }}</p>
+            </div>
+            <div class="col-md-6 book-description">
+                <h3>Description</h3>
+                <p>{{ $book->description ?? 'No description available.' }}</p>
+            </div>
         </div>
     </div>
-    <div class="row second-container">
-        <div class="col-md-6 author-info">
-            <h3>Author Info</h3>
-            <p><strong>Name:</strong> {{ $book->author_name . " " . $book->author_lastname ?? 'Unknown' }}</p>
-            <p><strong>Birth Date:</strong> {{ $book->author_birth_date ?? 'Unknown' }}</p>
-        </div>
-        <div class="col-md-6 book-description">
-            <h3>Description</h3>
-            <p>{{ $book->description ?? 'No description available.' }}</p>
-        </div>
-    </div>
-</div>
-</body>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+function confirmDelete(bookId) {
+    if (confirm("Are you sure you want to remove this book?")) {
+        $.ajax({
+            url: '/librarian/book/' + bookId,
+            type: 'DELETE',
+            data: {
+                "_token": "{{ csrf_token() }}",
+            },
+            success: function(response) {
+                alert(response.message);
+                // Optionally, you can redirect to a different page or update the UI
+                window.location.href = "{{ route('librarian.showBook', ['id' => $book->id_book]) }}";
+            },
+            error: function(xhr) {
+                alert("An error occurred while deleting the book.");
+            }
+        });
+    }
+}
+</script>
+    </body>
 </html>
 

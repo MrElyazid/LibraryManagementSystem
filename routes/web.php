@@ -48,6 +48,16 @@ Route::get('/loans/create/{book}', [LoanController::class, 'create'])->name('loa
 Route::post('/loans', [LoanController::class, 'store'])->name('loans.store');
 
 
+Route::prefix('librarian')->group(function(){
+    Route::get('/book/{id}', [BookController::class, 'show'])->name('librarian.showBook');
+    Route::get('/book/{id}/edit', [BookController::class, 'edit'])->name('librarian.editBook');
+    Route::delete('/book/{id}', [BookController::class, 'destroy'])->name('librarian.destroyBook');
+});
+
+Route::put('/librarian/book/{id}', [BookController::class, 'update'])->name('librarian.updateBook');
+
+Route::get('/librarian/book/add', [BookController::class, 'addBookForm'])->name('librarian.addBookForm');
+Route::post('/librarian/book/add', [BookController::class, 'addBook'])->name('librarian.addBook');
 
 
-
+Route::get('/librarian/loans', [LoanController::class, 'index'])->name('librarian.loans');

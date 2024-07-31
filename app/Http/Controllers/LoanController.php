@@ -11,21 +11,15 @@ use Illuminate\Support\Facades\Auth;
 
 class LoanController extends Controller
 {
+ 
+
     public function index()
     {
         $loans = Loan::all();
         return view('librarian.loans', compact('loans'));
     }
-
-
     
-    public function create($book)
-    {
-        $book = Book::find($book);
-        return view('loans.create', compact('book'));
-    }
-
-
+    
 
     public function store(Request $request)
 {

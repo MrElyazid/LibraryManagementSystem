@@ -14,12 +14,24 @@ class Loan extends Model
 
     protected $primaryKey = 'id_loan';
 
-    public function book()
+    // Define accessors for book and client
+    public function getBookAttribute()
+    {
+        return Book::find($this->attributes['book']);
+    }
+
+    public function getClientAttribute()
+    {
+        return Client::find($this->attributes['client']);
+    }
+
+    // Keep the original relationship methods
+    public function bookRelation()
     {
         return $this->belongsTo(Book::class, 'book', 'id_book');
     }
 
-    public function client()
+    public function clientRelation()
     {
         return $this->belongsTo(Client::class, 'client', 'id_client');
     }

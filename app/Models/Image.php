@@ -12,7 +12,7 @@ class Image extends Model
     protected $primaryKey = 'id_image';
 
     protected $fillable = [
-        'path', // Assuming you have a path column or similar
+        'path',
     ];
 
     public function categories()

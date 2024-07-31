@@ -78,6 +78,7 @@ h2, h3 {
             </div>
         </form>
         
+        
         @if(isset($books))
             <h3 class="text-center">Search Results:</h3>
             @if($books->isEmpty())
