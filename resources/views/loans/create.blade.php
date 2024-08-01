@@ -34,9 +34,6 @@
             overflow: hidden;
             transition: transform 0.3s ease;
         }
-        .book-info:hover {
-            transform: scale(1.02);
-        }
         .book-image {
             max-height: 300px;
             object-fit: cover;

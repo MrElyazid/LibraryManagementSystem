@@ -10,6 +10,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LibrarianController;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
