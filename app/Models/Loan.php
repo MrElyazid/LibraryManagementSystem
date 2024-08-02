@@ -12,6 +12,14 @@ class Loan extends Model
         'book', 'client', 'date_borrowed', 'due_date', 'return_date'
     ];
 
+
+    protected $casts = [
+        'date_borrowed' => 'datetime',
+        'due_date' => 'datetime',
+    ];
+
+
+    
     protected $primaryKey = 'id_loan';
 
     // Define accessors for book and client

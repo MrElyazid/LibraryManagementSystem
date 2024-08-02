@@ -71,17 +71,17 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="{{ route('books.index')}}">
                         <i class="bi bi-book"></i> Books
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="{{ route('categories.index')}}">
                         <i class="bi bi-list-ul"></i> Categories
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="{{ route('authors.index')}}">
                         <i class="bi bi-person"></i> Authors
                     </a>
                 </li>

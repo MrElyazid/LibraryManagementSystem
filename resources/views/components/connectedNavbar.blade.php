@@ -25,7 +25,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="{{ route('backpack.index') }}">
                         <i class="bi bi-bag"></i> Backpack
                     </a>
                 </li>

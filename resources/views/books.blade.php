@@ -66,7 +66,6 @@ h2, h3 {
     @endif
 
 
-
     <div class="container mt-5">
         <h2 class="mb-4 text-center">Search for Books</h2>
         <form action="{{ route('books.search') }}" method="GET" class="mb-4">

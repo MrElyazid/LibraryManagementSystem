@@ -94,18 +94,25 @@
                 </p>
                 <div class="row justify-content-center">
                     <div class="col-md-8 duration-selector">
-                        <form method="POST" action="{{ route('loans.store') }}" class="text-center">
-                            @csrf
-                            <input type="hidden" id="book" name="book" value="{{ $book->id_book }}">
-                            <label for="duration" class="form-label">How long would you like to keep this treasure?</label>
-                            <select class="form-select mb-4" id="duration" name="duration" required>
-                                <option value="1_week">1 week of wonder</option>
-                                <option value="2_weeks">2 weeks of wisdom</option>
-                                <option value="3_weeks">3 weeks of enlightenment</option>
-                            </select>
-                            <button type="submit" class="btn submit-button">Begin Your Adventure!</button>
-                        </form>
+                        @if($alreadyLoaned)
+                            <div class="alert alert-info" role="alert">
+                                You've already loaned this book. Check your backpack!
+                            </div>
+                        @else
+                            <form method="POST" action="{{ route('loans.store') }}" class="text-center">
+                                @csrf
+                                <input type="hidden" id="book" name="book" value="{{ $book->id_book }}">
+                                <label for="duration" class="form-label">How long would you like to keep this treasure?</label>
+                                <select class="form-select mb-4" id="duration" name="duration" required>
+                                    <option value="1">1 week of wonder</option>
+                                    <option value="2">2 weeks of wisdom</option>
+                                    <option value="3">3 weeks of enlightenment</option>
+                                </select>
+                                <button type="submit" class="btn submit-button">Begin Your Adventure!</button>
+                            </form>
+                        @endif
                     </div>
+                    
                 </div>
             </div>
         </div>

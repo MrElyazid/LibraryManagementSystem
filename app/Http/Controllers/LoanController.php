@@ -21,7 +21,13 @@ class LoanController extends Controller
     
     public function create(Book $book)
     {
-        return view('loans.create', compact('book'));
+        $user = Auth::user();
+        $alreadyLoaned = Loan::where('client', $user->id_client)
+                             ->where('book', $book->id_book)
+                             ->whereNull('return_date')
+                             ->exists();
+
+        return view('loans.create', compact('book', 'alreadyLoaned'));
     }
 
     public function store(Request $request)

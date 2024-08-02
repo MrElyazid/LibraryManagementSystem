@@ -1,4 +1,5 @@
 <?php
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -8,9 +9,9 @@ use App\Http\Controllers\LoanController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\BackpackController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LibrarianController;
-use Barryvdh\DomPDF\Facade\Pdf;
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -62,3 +63,5 @@ Route::post('/librarian/book/add', [BookController::class, 'addBook'])->name('li
 
 
 Route::get('/librarian/loans', [LoanController::class, 'index'])->name('librarian.loans');
+
+Route::get('/backpack', [BackpackController::class, 'index'])->name('backpack.index');
