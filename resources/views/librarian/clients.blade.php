@@ -60,7 +60,6 @@
                         <th>Lastname</th>
                         <th>Email</th>
                         <th>Books Loaned</th>
-                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -71,9 +70,6 @@
                         <td>{{ $client->lastname }}</td>
                         <td>{{ $client->email }}</td>
                         <td>{{ $client->loans_count }}</td>
-                        <td>
-                            <button class="btn btn-primary btn-sm btn-inspect">Inspect Client</button>
-                        </td>
                     </tr>
                     @endforeach
                 </tbody>

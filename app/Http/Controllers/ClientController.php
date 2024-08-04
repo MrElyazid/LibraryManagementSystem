@@ -1,13 +1,11 @@
 <?php
 
-
-//app/Http/Controllers/ClientController.php
-
+// app/Http/Controllers/ClientController.php
 namespace App\Http\Controllers;
 
 use App\Models\Client;
 use Illuminate\Http\Request;
-use DB;
+use Illuminate\Support\Facades\Auth;
 
 class ClientController extends Controller
 {
@@ -32,4 +30,5 @@ class ClientController extends Controller
 
         return redirect()->route('clients.index');
     }
+
 }

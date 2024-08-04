@@ -4,9 +4,222 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Statistics</title>
 </head>
+
+
 <body>
-    <h1>dashboard page for librarian</h1>
+
+    @php
+    if (Auth::check() && !Auth::user()->isLibrarian() && Request::is('librarian/*')) {
+        header("Location: /home");
+        exit();
+    }
+    @endphp
+
+
+    @if(Auth::check())
+    @if(Auth::user()->isLibrarian())
+        @include('components.libnav')
+    @else
+        @include('components.connectedNavbar')
+    @endif
+    @else
+    @include('components.navbar')
+    @endif
+
+
+    <div class="container">
+        <h1 class="mb-4">Librarian Dashboard</h1>
+        
+        <!-- Simple Statistics -->
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Loans</h5>
+                        <p class="card-text display-4" id="total-loans">-</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Books</h5>
+                        <p class="card-text display-4" id="total-books">-</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Clients</h5>
+                        <p class="card-text display-4" id="total-clients">-</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Visual Graphs -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Loans Over Past Month</h5>
+                        <canvas id="loans-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Top 10 Loaned Books</h5>
+                        <canvas id="top-books-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Top 5 Authors with Most Books</h5>
+                        <canvas id="top-authors-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Top 5 Users with Most Books Loaned</h5>
+                        <canvas id="top-users-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Fetch simple stats
+        fetch('{{ route('librarian.stats.simple') }}')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('total-loans').textContent = data.total_loans;
+                document.getElementById('total-books').textContent = data.total_books;
+                document.getElementById('total-clients').textContent = data.total_clients;
+            });
+    
+        // Loans Over Past Month
+        fetch('{{ route('librarian.stats.loansByDay') }}')
+            .then(response => response.json())
+            .then(data => {
+                new Chart(document.getElementById('loans-chart'), {
+                    type: 'line',
+                    data: {
+                        labels: data.labels,
+                        datasets: [{
+                            label: 'Number of Loans',
+                            data: data.values,
+                            borderColor: 'rgb(75, 192, 192)',
+                            tension: 0.1 }] }
+                            , options: 
+                            { responsive: true,
+                                 scales: {
+                                     y: {
+                                         beginAtZero: true 
+                                        } 
+                                    } 
+                                } 
+                            }); 
+                        });
+    
+// Top 10 Loaned Books
+fetch('{{ route('librarian.stats.topLoanedBooks') }}')
+    .then(response => response.json())
+    .then(data => {
+        new Chart(document.getElementById('top-books-chart'), {
+            type: 'bar',
+            data: {
+                labels: data.labels,
+                datasets: [{
+                    label: 'Number of Loans',
+                    data: data.values,
+                    backgroundColor: 'rgba(54, 162, 235, 0.5)'
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    });
+
+// Top 5 Authors with Most Books
+fetch('{{ route('librarian.stats.topAuthors') }}')
+    .then(response => response.json())
+    .then(data => {
+        new Chart(document.getElementById('top-authors-chart'), {
+            type: 'pie',
+            data: {
+                labels: data.labels,
+                datasets: [{
+                    data: data.values,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.5)',
+                        'rgba(54, 162, 235, 0.5)',
+                        'rgba(255, 206, 86, 0.5)',
+                        'rgba(75, 192, 192, 0.5)',
+                        'rgba(153, 102, 255, 0.5)'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Top 5 Authors'
+                    }
+                }
+            }
+        });
+    });
+
+// Top 5 Users with Most Books Loaned
+fetch('{{ route('librarian.stats.topUsers') }}')
+    .then(response => response.json())
+    .then(data => {
+        new Chart(document.getElementById('top-users-chart'), {
+            type: 'bar',
+            data: {
+                labels: data.labels,
+                datasets: [{
+                    label: 'Number of Books Loaned',
+                    data: data.values,
+                    backgroundColor: 'rgba(153, 102, 255, 0.5)'
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    });
+    </script>
 </body>
 </html>

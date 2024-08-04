@@ -121,7 +121,7 @@ public function deleteLoan($loanId)
 
 public function export($format)
 {
-    $loans = Loan::all(); // Or use your existing query to get loans
+    $loans = Loan::all();
 
     if ($format === 'csv') {
         return $this->exportToCsv($loans);

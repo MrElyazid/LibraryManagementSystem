@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $user->name }}'s Profile</title>
+    <title>{{ $client->name }}'s Profile</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
@@ -53,17 +53,16 @@
     </style>
 </head>
 <body>
-    @include('components.connectedNavbar')  <!-- Include the common navbar -->
-
+    @include('components.connectedNavbar')
     <div class="profile-container">
         <div class="profile-header">
-            <h1>{{ $user->name }}'s Profile</h1>
+            <h1>{{ $client->name }}'s Profile</h1>
         </div>
         <div class="user-info">
-            <p><strong>Name:</strong> {{ $user->name }}</p>
-            <p><strong>Last Name:</strong> {{ $user->lastname }}</p>
-            <p><strong>Join Date:</strong> {{ date('F d, Y', strtotime($user->created_at)) }}</p>
-            <p><strong>Total Books Loaned:</strong> 0</p>
+            <p><strong>Name:</strong> {{ $client->name }}</p>
+            <p><strong>Last Name:</strong> {{ $client->lastname }}</p>
+            <p><strong>Join Date:</strong> {{ date('F d, Y', strtotime($client->created_at)) }}</p>
+            <p><strong>Total Books Loaned:</strong> {{ $totalBooksLoaned }}</p>
         </div>
         <form action="{{ route('logout') }}" method="POST">
             @csrf

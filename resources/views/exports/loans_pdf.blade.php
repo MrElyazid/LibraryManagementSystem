@@ -25,8 +25,8 @@
                     <td>{{ $loan->id_loan }}</td>
                     <td>{{ $loan->book->title }}</td>
                     <td>{{ $loan->client->name }}</td>
-                    <td>{{ $loan->date_borrowed }}</td>
-                    <td>{{ $loan->due_date }}</td>
+                    <td>{{ $loan->date_borrowed->format('Y-m-d') }}</td>
+                    <td>{{ $loan->due_date->format('Y-m-d') }}</td>
                     <td>{{ $loan->return_date ?? 'Not returned' }}</td>
                 </tr>
             @endforeach

@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoanController;
+use App\Http\Controllers\StatController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProfileController;
@@ -77,3 +78,14 @@ Route::get('/librarian/export-loans/{format}', [LoanController::class, 'export']
 
 
 Route::post('/librarian/return-book/{loanId}', [LoanController::class, 'returnBook'])->name('librarian.returnBook');
+
+
+
+Route::prefix('librarian')->name('librarian.')->group(function () {
+    Route::get('/dashboard', [LibrarianController::class, 'dashboard'])->name('dashboard');
+    Route::get('/stats/simple', [StatController::class, 'getSimpleStats'])->name('stats.simple');
+    Route::get('/stats/loans-by-day', [StatController::class, 'getLoansByDay'])->name('stats.loansByDay');
+    Route::get('/stats/top-loaned-books', [StatController::class, 'getTopLoanedBooks'])->name('stats.topLoanedBooks');
+    Route::get('/stats/top-authors', [StatController::class, 'getTopAuthors'])->name('stats.topAuthors');
+    Route::get('/stats/top-users', [StatController::class, 'getTopUsers'])->name('stats.topUsers');
+});

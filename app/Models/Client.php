@@ -36,4 +36,10 @@ class Client extends Authenticatable
         return $this->hasMany(Loan::class, 'client', 'id_client');
     }
 
+
+    public function bookRelation()
+{
+    return $this->belongsTo(Book::class, 'book', 'id_book');
+}
+
 }
