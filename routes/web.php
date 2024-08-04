@@ -65,3 +65,15 @@ Route::post('/librarian/book/add', [BookController::class, 'addBook'])->name('li
 Route::get('/librarian/loans', [LoanController::class, 'index'])->name('librarian.loans');
 
 Route::get('/backpack', [BackpackController::class, 'index'])->name('backpack.index');
+
+
+Route::post('/librarian/message-client/{clientId}', [LoanController::class, 'messageClient'])->name('librarian.messageClient');
+
+Route::patch('/librarian/change-due-date/{loanId}', [LoanController::class, 'changeDueDate'])->name('librarian.changeDueDate');
+Route::delete('/librarian/delete-loan/{loanId}', [LoanController::class, 'deleteLoan'])->name('librarian.deleteLoan');
+
+
+Route::get('/librarian/export-loans/{format}', [LoanController::class, 'export'])->name('librarian.exportLoans');
+
+
+Route::post('/librarian/return-book/{loanId}', [LoanController::class, 'returnBook'])->name('librarian.returnBook');

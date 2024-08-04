@@ -18,8 +18,6 @@ class Loan extends Model
         'due_date' => 'datetime',
     ];
 
-
-    
     protected $primaryKey = 'id_loan';
 
     // Define accessors for book and client
@@ -33,13 +31,12 @@ class Loan extends Model
         return Client::find($this->attributes['client']);
     }
 
-    // Keep the original relationship methods
-    public function bookRelation()
+    public function book()
     {
         return $this->belongsTo(Book::class, 'book', 'id_book');
     }
 
-    public function clientRelation()
+    public function client()
     {
         return $this->belongsTo(Client::class, 'client', 'id_client');
     }

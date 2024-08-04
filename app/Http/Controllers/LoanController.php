@@ -5,10 +5,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\Loan;
+use App\Models\Client;
+use App\Exports\LoansExport;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Excel;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Response;
+
+
 
 class LoanController extends Controller
 {
@@ -54,4 +61,127 @@ class LoanController extends Controller
         return $pdf->download('loan_receipt_' . $loan->id_loan . '.pdf');
     }
     
+
+public function messageClient(Request $request, $clientId)
+{
+    $client = Client::findOrFail($clientId);
+    $message = $request->input('message');
+
+    try {
+        Mail::raw($message, function ($mail) use ($client) {
+            $mail->to($client->email)
+                 ->subject('Message from Librarian');
+            // The 'from' address will be taken from MAIL_FROM_ADDRESS in .env
+        });
+
+        return response()->json(['success' => true, 'message' => 'Message sent successfully']);
+    } catch (\Exception $e) {
+        return response()->json(['success' => false, 'message' => 'Failed to send message: ' . $e->getMessage()], 500);
+    }
 }
+
+
+public function changeDueDate(Request $request, $loanId)
+{
+    $request->validate([
+        'new_due_date' => 'required|date',
+    ]);
+
+    $loan = Loan::findOrFail($loanId);
+    $loan->due_date = $request->input('new_due_date');
+
+    try {
+        $loan->save();
+        return response()->json(['success' => true, 'message' => 'Due date updated successfully']);
+    } catch (\Exception $e) {
+        return response()->json(['success' => false, 'message' => 'Failed to update due date: ' . $e->getMessage()], 500);
+    }
+}
+
+
+
+public function deleteLoan($loanId)
+{
+    $loan = Loan::findOrFail($loanId);
+
+    if (!$loan->return_date || now()->lte($loan->return_date)) {
+        return response()->json(['success' => false, 'message' => 'Cannot delete this loan. It has not been returned or the return date has not passed.'], 400);
+    }
+
+    try {
+        $loan->delete();
+        return response()->json(['success' => true, 'message' => 'Loan deleted successfully']);
+    } catch (\Exception $e) {
+        return response()->json(['success' => false, 'message' => 'Failed to delete loan: ' . $e->getMessage()], 500);
+    }
+}
+
+
+
+
+public function export($format)
+{
+    $loans = Loan::all(); // Or use your existing query to get loans
+
+    if ($format === 'csv') {
+        return $this->exportToCsv($loans);
+    } elseif ($format === 'pdf') {
+        return $this->exportToPdf($loans);
+    }
+
+    return back()->with('error', 'Unsupported export format');
+}
+
+private function exportToCsv($loans)
+{
+    $headers = [
+        'Content-Type' => 'text/csv',
+        'Content-Disposition' => 'attachment; filename=loans.csv',
+    ];
+
+    $callback = function() use ($loans) {
+        $file = fopen('php://output', 'w');
+        fputcsv($file, ['ID', 'Book', 'Client', 'Date Borrowed', 'Due Date', 'Return Date']);
+
+        foreach ($loans as $loan) {
+            fputcsv($file, [
+                $loan->id_loan,
+                $loan->book->title, // Assuming you have a 'book' relationship
+                $loan->client->name, // Assuming you have a 'client' relationship
+                $loan->date_borrowed,
+                $loan->due_date,
+                $loan->return_date ?? 'Not returned'
+            ]);
+        }
+
+        fclose($file);
+    };
+
+    return Response::stream($callback, 200, $headers);
+}
+
+private function exportToPdf($loans)
+{
+    $pdf = Pdf::loadView('exports.loans_pdf', compact('loans'));
+    return $pdf->download('loans.pdf');
+}
+
+
+
+public function returnBook($loanId)
+{
+    $loan = Loan::findOrFail($loanId);
+    
+    if ($loan->return_date) {
+        return response()->json(['success' => false, 'message' => 'This book has already been returned.'], 400);
+    }
+
+    $loan->return_date = now();
+    $loan->save();
+
+    return response()->json(['success' => true, 'message' => 'Book returned successfully.']);
+}
+
+
+}
+
