@@ -42,4 +42,10 @@ class Client extends Authenticatable
     return $this->belongsTo(Book::class, 'book', 'id_book');
 }
 
+public function wishlists()
+    {
+        return $this->hasMany(wishlist::class, 'client', 'id_client');
+    }
+
+
 }

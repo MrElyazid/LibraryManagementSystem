@@ -114,8 +114,19 @@ body {
                 <button type="button" class="remove-button btn btn-danger mt-2" onclick="confirmDelete({{ $book->id_book }})">Remove</button>
             @else
                 <a class="loan-button btn btn-primary mt-3" href="{{ route('loans.create', ['book' => $book->id_book]) }}">Loan</a>
-                <button class="wishlist-button btn btn-success mt-2">Wishlist</button>
-            @endif
+                
+
+                @php
+                    $isWishlisted = Auth::check() ? Auth::user()->wishlists()->where('book', $book->id_book)->exists() : false;
+                @endphp
+
+                @if($isWishlisted)
+                    <button class="loan-button btn btn-success mt-3" disabled>Already Wishlisted</button>
+                @else
+                <a class="loan-button btn btn-success mt-3" href="{{ route('wishlist.add', ['book' => $book->id_book]) }}">Wishlist</a>
+                @endif
+
+                @endif
 
 
             </div>

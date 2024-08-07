@@ -13,6 +13,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BackpackController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LibrarianController;
+use App\Http\Controllers\WishlistController;
+
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -72,11 +74,7 @@ Route::post('/librarian/message-client/{clientId}', [LoanController::class, 'mes
 
 Route::patch('/librarian/change-due-date/{loanId}', [LoanController::class, 'changeDueDate'])->name('librarian.changeDueDate');
 Route::delete('/librarian/delete-loan/{loanId}', [LoanController::class, 'deleteLoan'])->name('librarian.deleteLoan');
-
-
 Route::get('/librarian/export-loans/{format}', [LoanController::class, 'export'])->name('librarian.exportLoans');
-
-
 Route::post('/librarian/return-book/{loanId}', [LoanController::class, 'returnBook'])->name('librarian.returnBook');
 
 
@@ -89,3 +87,8 @@ Route::prefix('librarian')->name('librarian.')->group(function () {
     Route::get('/stats/top-authors', [StatController::class, 'getTopAuthors'])->name('stats.topAuthors');
     Route::get('/stats/top-users', [StatController::class, 'getTopUsers'])->name('stats.topUsers');
 });
+
+
+Route::get('/wishlist', [wishlistController::class, 'index'])->name('wishlist.index');
+Route::get('/wishlist/add/{book}', [WishlistController::class, 'add'])->name('wishlist.add');
+Route::delete('/wishlist/remove/{id}', [WishlistController::class, 'destroy'])->name('wishlist.remove');

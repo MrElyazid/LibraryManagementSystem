@@ -40,9 +40,9 @@ class LoanController extends Controller
     public function store(Request $request)
     {
         $book = Book::find($request->input('book'));
-        $duration = $request->input('duration');
+        $duration = intval($request->input('duration'));
         $borrowDate = Carbon::now();
-        $dueDate = $borrowDate->addWeeks($duration);
+        $dueDate = $borrowDate->copy()->addWeeks($duration);
 
         $loan = new Loan();
         $loan->book = $book->id_book;
