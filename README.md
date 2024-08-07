@@ -121,4 +121,4 @@ The website is available from two perspectives: client and librarian.
 
 
 # Notes : 
-The website isnt complete, nor does it follow all the best laravel practices, has many spaghetti codes and bugs and some functionalities are not yet implemneted ( fine calculation for late book returns, setting a max number of loans... etc ) this is an early version of it and ( i hope ) i can work more on it in the future.
+The website isnt complete, nor does it follow all the best laravel practices, has many spaghetti codes and bugs and some functionalities are not yet implemneted ( fine calculation for late book returns, setting a max number of loans... etc ) this is an early version of it and (i hope) maybe i can work more on it in the future.
