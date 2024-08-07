@@ -13,7 +13,7 @@ class Wishlist extends Model
     protected $fillable = ['book', 'client', 'date_added'];
 
 
-    // Define accessors for book and client
+    
     public function getBookAttribute()
     {
         return Book::find($this->attributes['book']);

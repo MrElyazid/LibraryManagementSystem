@@ -101,7 +101,10 @@ body {
             @include('components.connectedNavbar')
         @endif
     @else
-        @include('components.navbar')
+    @php
+    header("Location: /login");
+    exit();
+@endphp
     @endif
     <div class="container main-container">
         <div class="row first-container">
@@ -113,17 +116,23 @@ body {
                 <a class="edit-button btn btn-warning mt-3" href="{{ route('librarian.editBook', ['id' => $book->id_book]) }}">Edit</a>
                 <button type="button" class="remove-button btn btn-danger mt-2" onclick="confirmDelete({{ $book->id_book }})">Remove</button>
             @else
-                <a class="loan-button btn btn-primary mt-3" href="{{ route('loans.create', ['book' => $book->id_book]) }}">Loan</a>
+
+
+            @php
+            $isWishlisted = Auth::check() ? Auth::user()->wishlists()->where('book', $book->id_book)->exists() : false;
+            $isloanable = $book->quantity === 0 || $book->status !== 'Available';
+        @endphp
+
+                @if ($isloanable)
+                <button class="loan-button btn btn-info mt-3" disabled>Not available for loan</button>
+                @else
+            <a class="loan-button btn btn-primary mt-3 loannn" href="{{ route('loans.create', ['book' => $book->id_book]) }}">Loan</a>
+                @endif
                 
-
-                @php
-                    $isWishlisted = Auth::check() ? Auth::user()->wishlists()->where('book', $book->id_book)->exists() : false;
-                @endphp
-
                 @if($isWishlisted)
                     <button class="loan-button btn btn-success mt-3" disabled>Already Wishlisted</button>
                 @else
-                <a class="loan-button btn btn-success mt-3" href="{{ route('wishlist.add', ['book' => $book->id_book]) }}">Wishlist</a>
+                <a class="wishlist-button btn btn-success mt-3" href="{{ route('wishlist.add', ['book' => $book->id_book]) }}">Wishlist</a>
                 @endif
 
                 @endif
@@ -134,6 +143,8 @@ body {
                 <h2>{{ $book->title }}</h2>
                 <p><strong>Author:</strong> {{ $book->author_name . " " . $book->author_lastname ?? 'Unknown' }}</p>
                 <p><strong>Category:</strong> {{ $book->category_name ?? 'Unknown' }}</p>
+                <p><strong>Quantity:</strong> {{ $book->quantity ?? 'Unknown' }}</p>
+                <p><strong>Status:</strong> {{ $book->status ?? 'Unknown' }}</p>
                 <p><strong>Year of Publish:</strong> {{ date('Y', strtotime($book->created_at)) }}</p>
             </div>
         </div>
@@ -162,7 +173,6 @@ function confirmDelete(bookId) {
             },
             success: function(response) {
                 alert(response.message);
-                // Optionally, you can redirect to a different page or update the UI
                 window.location.href = "{{ route('librarian.showBook', ['id' => $book->id_book]) }}";
             },
             error: function(xhr) {
@@ -172,6 +182,7 @@ function confirmDelete(bookId) {
     }
 }
 </script>
+
     </body>
 </html>
 

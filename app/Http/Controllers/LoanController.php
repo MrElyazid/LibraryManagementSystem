@@ -51,7 +51,6 @@ class LoanController extends Controller
         $loan->due_date = $dueDate;
         $loan->save();
 
-        // Generate and return PDF
         return $this->generateReceipt($loan);
     }
 
@@ -71,7 +70,6 @@ public function messageClient(Request $request, $clientId)
         Mail::raw($message, function ($mail) use ($client) {
             $mail->to($client->email)
                  ->subject('Message from Librarian');
-            // The 'from' address will be taken from MAIL_FROM_ADDRESS in .env
         });
 
         return response()->json(['success' => true, 'message' => 'Message sent successfully']);
@@ -146,8 +144,8 @@ private function exportToCsv($loans)
         foreach ($loans as $loan) {
             fputcsv($file, [
                 $loan->id_loan,
-                $loan->book->title, // Assuming you have a 'book' relationship
-                $loan->client->name, // Assuming you have a 'client' relationship
+                $loan->book->title, 
+                $loan->client->name, 
                 $loan->date_borrowed,
                 $loan->due_date,
                 $loan->return_date ?? 'Not returned'

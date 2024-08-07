@@ -20,7 +20,6 @@ class Loan extends Model
 
     protected $primaryKey = 'id_loan';
 
-    // Define accessors for book and client
     public function getBookAttribute()
     {
         return Book::find($this->attributes['book']);

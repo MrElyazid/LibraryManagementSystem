@@ -7,26 +7,26 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
     <title>Books</title>
-
     <style>
-        body {
-    background-color: #f8f9fa; /* Light background color */
+
+    body {
+        background-color: #f8f9fa;
 }
 
 h2, h3 {
-    color: #343a40; /* Dark color for headings */
+    color: #343a40;
 }
 
 .card-horizontal {
     display: flex;
     flex-direction: row;
-    max-width: 100%; /* Make the card take full width within the column */
-    margin-bottom: 15px; /* Space between cards */
+    max-width: 100%; 
+    margin-bottom: 15px;
 }
 
 .card-horizontal img {
-    width: 150px; /* Fixed width for the book cover */
-    object-fit: cover; /* Maintain aspect ratio */
+    width: 150px;
+    object-fit: cover;
 }
 
 .card-body {
@@ -40,13 +40,13 @@ h2, h3 {
 }
 
 .btn-view-details {
-    background-color: #17a2b8; /* Custom color for View Details button */
+    background-color: #17a2b8;
     border-color: #17a2b8;
     color: white;
 }
 
 .btn-view-details:hover {
-    background-color: #138496; /* Darken on hover */
+    background-color: #138496;
     border-color: #117a8b;
 }
 
@@ -91,8 +91,8 @@ h2, h3 {
                                 <div class="card-body">
                                     <div class="card-body-content">
                                         <h5 class="card-title">{{ $book->title }}</h5>
-                                        <p class="card-text">by {{ $book->author }}</p>
-                                        <p class="card-text">Category: {{ $book->category->name }}</p>
+                                        <p class="card-text">by {{ $book->author_name }} {{ $book->author_lastname }}</p>
+                                        <p class="card-text">Category: {{ $book->category_name }}</p>
                                         <p class="card-text">ISBN: {{ $book->isbn }}</p>
                                     </div>
                                     <a href="{{ route('books.show', $book->id_book) }}" class="btn btn-view-details">View Details</a>

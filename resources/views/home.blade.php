@@ -90,6 +90,16 @@
         padding-left: 0;
     }
 
+
+    .card {
+    transition: transform 0.2s; /* Smooth scaling effect */
+}
+
+    .card:hover {
+        transform: scale(1.05); /* Scale up on hover */
+    }
+
+
     </style>
 </head>
 <body>
@@ -118,16 +128,17 @@
         <h2 class="mb-4">Latest Books</h2>
         <div id="latestBooksCarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
-                @foreach($latestBooks->chunk(3) as $key => $bookChunk)
+                @foreach($latestBooks->chunk(4) as $key => $bookChunk) <!-- Adjust to chunk by 4 -->
                     <div class="carousel-item @if($key === 0) active @endif">
                         <div class="d-flex justify-content-around">
                             @foreach($bookChunk as $book)
-                                <div class="card" style="width: 232px;">
-                                    <img src="{{ asset($book->image_path) }}" class="card-img-top" style="width: 232px; height: 320px; object-fit: cover;" alt="{{ $book->title }}">
+                                <div class="card border-0 shadow" style="width: 180px;">
+                                    <img src="{{ asset($book->image_path) }}" class="card-img-top" style="height: 240px; object-fit: cover;" alt="{{ $book->title }}">
                                     <div class="card-body">
-                                        <h5 class="card-title">{{ $book->title }}</h5>
-                                        <p class="card-text">Status: {{ $book->status }}</p>
-                                        <p class="card-text">Quantity: {{ $book->quantity }}</p>
+                                        <h5 class="card-title" style="font-size: 1rem;">{{ $book->title }}</h5>
+                                        <p class="card-text" style="font-size: 0.85rem;">Status: {{ $book->status }}</p>
+                                        <p class="card-text" style="font-size: 0.85rem;">Quantity: {{ $book->quantity }}</p>
+                                        <a href="{{ route('books.show', $book->id_book) }}" class="btn btn-primary btn-sm">See Details</a>
                                     </div>
                                 </div>
                             @endforeach
@@ -146,10 +157,42 @@
         </div>
     </div>
     
-    @yield('content')
+
+    <div class="container mt-4">
+        <h2 class="mb-4">Featured Authors</h2>
+        <div id="authorsCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                @foreach($randomAuthors->chunk(4) as $key => $authorChunk) <!-- Adjust to chunk by 4 -->
+                    <div class="carousel-item @if($key === 0) active @endif">
+                        <div class="d-flex justify-content-around">
+                            @foreach($authorChunk as $author)
+                                <div class="card border-0 shadow" style="width: 180px;">
+                                    <a href="{{ route('authors.index') }}" title="See more about {{ $author->name }} {{ $author->lastname }}">
+                                        <img src="{{ asset($author->getImagePathAttribute()) }}" class="card-img-top" style="height: 240px; object-fit: cover;" alt="{{ $author->name }} {{ $author->lastname }}">
+                                    </a>
+                                    <div class="card-body">
+                                        <h5 class="card-title" style="font-size: 1rem;">{{ $author->name }} {{ $author->lastname }}</h5>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#authorsCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" style="background-color: #000;" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#authorsCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" style="background-color: #000;" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
     
     
     
+
     <section id="how-it-works" class="py-5 bg-light">
         <div class="container">
             <h2 class="text-center mb-4">How Our Site Works</h2>
@@ -160,7 +203,7 @@
                         <div class="card-body d-flex flex-column">
                             <i class="bi bi-info-circle h1 text-primary mb-3"></i>
                             <h4 class="card-title">About Us</h4>
-                            <p class="card-text flex-grow-1">Our site is your one-stop destination for amazing book rentals. Discover a wide range of genres, authors, and titles. Happy reading!</p>
+                            <p class="card-text flex-grow-1">Ohara Library is a book loan website where clients can reserve books online before picking them up at the library.</p>
                         </div>
                     </div>
                 </div>
@@ -170,7 +213,7 @@
                         <div class="card-body d-flex flex-column">
                             <i class="bi bi-book h1 text-success mb-3"></i>
                             <h4 class="card-title">How Book Rentals Work</h4>
-                            <p class="card-text flex-grow-1">Browse our collection, choose your favorite books, and rent them out with just a few clicks. Enjoy reading and return the books when you are done!</p>
+                            <p class="card-text flex-grow-1">Once a book is reserved on the website, a PDF receipt is generated. You can present this receipt to library staff to pick up your book at the library.</p>
                         </div>
                     </div>
                 </div>
@@ -195,4 +238,26 @@
     </section>
 
 </body>
+
+<footer style="background-color: #f8f8f8; padding: 20px; text-align: center; font-family: Arial, sans-serif; border-top: 1px solid #e0e0e0;">
+    <div>
+        <h3 style="margin: 0;">Ohara Library</h3>
+        <p style="margin: 5px 0;">Your gateway to knowledge and literature</p>
+    </div>
+    <div style="margin: 15px 0;">
+        <a href="#" style="margin: 0 15px; text-decoration: none; color: #007BFF;">About Us</a>
+        <a href="#" style="margin: 0 15px; text-decoration: none; color: #007BFF;">Contact Us</a>
+        <a href="#" style="margin: 0 15px; text-decoration: none; color: #007BFF;">Terms of Service</a>
+        <a href="#" style="margin: 0 15px; text-decoration: none; color: #007BFF;">Privacy Policy</a>
+    </div>
+    <div>
+        <p style="margin: 5px 0;">© 2024 Ohara Library. All Rights Reserved.</p>
+        <p style="margin: 5px 0;">Follow us on 
+            <a href="#"  style="text-decoration: none; color: #007BFF;">Facebook</a>, 
+            <a href="#"  style="text-decoration: none; color: #007BFF;">Twitter</a>, 
+            <a href="#"  style="text-decoration: none; color: #007BFF;">Instagram</a>
+        </p>
+    </div>
+</footer>
+
 </html>

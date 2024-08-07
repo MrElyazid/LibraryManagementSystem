@@ -74,7 +74,10 @@
             @include('components.connectedNavbar')
         @endif
     @else
-        @include('components.navbar')
+        @php
+            header("Location: /login");
+            exit();
+        @endphp
     @endif
     
     <div class="container backpack-container">

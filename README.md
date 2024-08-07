@@ -1,43 +1,91 @@
-### Client Features:
 
-1. **Account Management:**
-   - Update personal information (address, phone number, email).
-   - Change password and manage security settings.
+# Ohara Library
 
-2. **Borrowing and Viewing History:**
-   - Request extensions for current loans.
-   - View due dates and receive notifications for upcoming due dates.
+A website where clients can reserve books before picking them up physically from a real library, made with Laravel.
 
-3. **Search for Books:**
-   - Advanced search filters (Author, Title, Status).
-   - Save favorite searches or books for easy access later.
+## Features
 
-4. **Cart (Backpack) Functionality:**
-   - Add up to 5 books ( 8 for students ) to a virtual cart for loan.
-   - Option to reserve books that are currently unavailable.
-   - Notifications for when reserved books become available.
+The website is available from two perspectives: client and librarian.
 
+### Client Features
 
-### Librarian Features:
+- Loan books
+- Manage wishlisted books
+- Access profile
+- Search and view book authors and categories
 
-1. **Book Management:**
-   - Add, delete, and edit books through a dashboard page.
-   - Manage book categories and tags for better organization.
+### Librarian Features
 
-2. **Loan Management:**
-   - View overdue loans and send reminders to clients.
-   - Manage book reservations and waiting lists.
+- Export list of loans in PDF or CSV format
+- Declare a loan ended by setting the date the book was returned
+- Message clients via email (see SMTP configuration)
+- Change due dates for loans
+- Access list of clients and their loans
+- Edit book information
+- Remove books
+- Add books to the database
+- Access statistics dashboard and view visual charts
 
-3. **Client Notifications:**
-   - Automated email and SMS notifications for book returns, due dates, and reservation availability.
-
-4. **Statistics and Reports:**
-   - Detailed analytics on book loans, client activity, and book popularity.
-   - Export statistics in multiple formats (PDF, Excel, CSV).
-   - Statistics on specific data points (e.g., monthly loans, most borrowed books).
-
-
-## ER diagram : 
+## ER Diagram
 
 ![ER Diagram](readmeassets/MLD_LMS.excalidraw.png)
+
+## How to Run
+
+1. **Clone the Repository**:
+   ```bash
+   git clone [repository_url]
+   cd [repository_name]
+   ```
+
+2. **Install Dependencies**:
+   ```bash
+   composer install
+   ```
+
+3. **Configure the `.env` File** with your database credentials:
+   ```bash
+   DB_HOST=localhost
+   DB_PORT=3306
+   DB_DATABASE=your_database_name
+   DB_USERNAME=your_database_username
+   DB_PASSWORD=your_database_password
+   ```
+
+4. **Run Migrations** to populate the database:
+   ```bash
+   php artisan migrate
+   ```
+
+5. **Optional: Setup SMTP Server**:
+   To enable email functionality, add the following to the `.env` file:
+   ```bash
+   MAIL_MAILER=smtp
+   MAIL_HOST=smtp.gmail.com
+   MAIL_PORT=587
+   MAIL_USERNAME=YOUR_EMAIL
+   MAIL_PASSWORD=GOOGLE_APP_PASSWORD
+   MAIL_ENCRYPTION=tls
+   MAIL_FROM_ADDRESS=YOUR_EMAIL
+   MAIL_FROM_NAME="Ohara Library"
+   ```
+
+6. **Serve the Application**:
+   Ensure your database is running, then start the server:
+   ```bash
+   php artisan serve
+   ```
+   The app should be accessible at `http://localhost:8000`.
+
+7. **Optional: Use Sample Data**:
+   - Run the following to create the schema:
+     ```bash
+     php artisan migrate
+     ```
+   - Import data with:
+     ```bash
+     php artisan db:import --ignore-auto-increment
+     ```
+   - Download the images folder from [link], decompress it, and place it at `storage/app/public`.
+
 
