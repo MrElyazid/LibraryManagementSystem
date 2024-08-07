@@ -61,8 +61,10 @@ Route::prefix('librarian')->group(function(){
 
 Route::put('/librarian/book/{id}', [BookController::class, 'update'])->name('librarian.updateBook');
 
-Route::get('/librarian/book/add', [BookController::class, 'addBookForm'])->name('librarian.addBookForm');
-Route::post('/librarian/book/add', [BookController::class, 'addBook'])->name('librarian.addBook');
+Route::get('/librarian/addBook', [BookController::class, 'addBookForm'])->name('librarian.addBookForm');
+Route::post('/librarian/addBook', [BookController::class, 'addBook'])->name('librarian.addBook');
+
+
 
 
 Route::get('/librarian/loans', [LoanController::class, 'index'])->name('librarian.loans');

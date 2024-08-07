@@ -34,8 +34,8 @@ The website is available from two perspectives: client and librarian.
 
 1. **Clone the Repository**:
    ```bash
-   git clone [https://github.com/MrElyazid/LibraryManagementSystem.git]
-   cd [LibraryManagementSystem]
+   git clone https://github.com/MrElyazid/LibraryManagementSystem.git
+   cd foldername
    ```
 
 2. **Install Dependencies**:
@@ -44,7 +44,7 @@ The website is available from two perspectives: client and librarian.
    ```
 
 3. **Configure the `.env` File** with database credentials:
-   ```bash
+   ```ini
    DB_HOST=localhost
    DB_PORT=3306
    DB_DATABASE=your_database_name
@@ -52,14 +52,19 @@ The website is available from two perspectives: client and librarian.
    DB_PASSWORD=your_database_password
    ```
 
-4. **Run Migrations**:
+4. **Import the Database (Optional)**:
+   Import the database dump file `db_library.sql` using phpMyAdmin or a similar tool to have the same data as in the screenshots. 
+   
+   Additionally, download the images folder from [here](https://drive.google.com/file/d/1wXHFYNlLC8emqIPJsGTnUvOa9Pi4A8dW/view?usp=sharing), decompress it, and place it at `storage/app/public`.
+
+5. **Run Migrations**:
    ```bash
    php artisan migrate
    ```
 
-5. **Optional: Setup SMTP Server**:
+6. **Setup SMTP Server (Optional)**:
    To enable email functionality, add the following to the `.env` file:
-   ```bash
+   ```ini
    MAIL_MAILER=smtp
    MAIL_HOST=smtp.gmail.com
    MAIL_PORT=587
@@ -70,31 +75,19 @@ The website is available from two perspectives: client and librarian.
    MAIL_FROM_NAME="Ohara Library"
    ```
 
-6. **Serve the Application**:
-   make sure the  database is up and running, then start the server:
+7. **Serve the Application**:
+   Make sure the database is up and running, then start the server:
    ```bash
    php artisan serve
    ```
    The app should be accessible at `http://localhost:8000`.
-
-7. **Optional: Use Sample Data**:
-   - Run the following to create the schema:
-     ```bash
-     php artisan migrate
-     ```
-   - Import data with:
-     ```bash
-     php artisan db:import --ignore-auto-increment
-     ```
-   - Download the images folder from [https://drive.google.com/file/d/1wXHFYNlLC8emqIPJsGTnUvOa9Pi4A8dW/view?usp=sharing], decompress it, and place it at `storage/app/public`.
-
 
 ## Website Screenshots
 
 ### Homepage
 ![Homepage](https://drive.google.com/uc?export=view&id=1tCjL9i9uKAB0vsRuAxnD1SURDsiUFssB)
 
-### Books page
+### Books Page
 ![Books](https://drive.google.com/uc?export=view&id=1mVZOEzwue3FKCmHF78b5x6i8QmfoLH94)
 
 ### Backpack
@@ -109,10 +102,10 @@ The website is available from two perspectives: client and librarian.
 ### Authors
 ![Authors](https://drive.google.com/uc?export=view&id=1BjLj5NovLnXApM2awZ2fdbgS6P-J1G_e)
 
-### Book page
+### Book Page
 ![Book](https://drive.google.com/uc?export=view&id=1HaFSMW4HyYgHEub9t3oQHspQ41TYU26t)
 
-### Loan form
+### Loan Form
 ![Loan Form](https://drive.google.com/uc?export=view&id=1Fpz4-umXIC38pDp2FtKXyG6ZRduA0i-8)
 
 ### Clients
@@ -120,3 +113,10 @@ The website is available from two perspectives: client and librarian.
 
 ### Dashboard
 ![Dashboard](https://drive.google.com/uc?export=view&id=1tBVyKfA0nehcDJf5PN3SEUuj4Ruq8Cib)
+
+### Loans
+![Loans](https://drive.google.com/uc?export=view&id=1KMVjYZ0DjYqe_F2YPEp2_zbBMHd7gbOQ)
+
+### Add Book
+![Add Book](https://drive.google.com/uc?export=view&id=1VSSVCoX3jzq-HsGWRQSstSOXXr3W9ikh)
+
