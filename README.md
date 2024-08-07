@@ -1,7 +1,6 @@
-
 # Ohara Library
 
-A website where clients can reserve books before picking them up physically from a real library, made with Laravel.
+A website where clients can reserve books via downloading a receipt for a book in PDF format before picking them up physically from a real library by providing it to a library staff, made with Laravel and bootstrap.
 
 ## Features
 
@@ -120,3 +119,6 @@ The website is available from two perspectives: client and librarian.
 ### Add Book
 ![Add Book](https://drive.google.com/uc?export=view&id=1VSSVCoX3jzq-HsGWRQSstSOXXr3W9ikh)
 
+
+# Notes : 
+The website isnt complete, nor does it follow all the best laravel practices, has many spaghetti codes and bugs and some functionalities are not yet implemneted ( fine calculation for late book returns, setting a max number of loans... etc ) this is an early version of it and ( i hope ) i can work more on it in the future.
