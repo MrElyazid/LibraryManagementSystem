@@ -34,6 +34,12 @@
                         <i class="bi bi-people"></i> Clients
                     </a>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('librarian.addBook') }}">
+                        <i class="bi bi-plus"></i> Add Book
+                    </a>
+                </li>
             </ul>
             <a class="nav-link btn btn-outline-secondary" href="{{ route('librarian.dashboard') }}">
                 <i class="bi bi-person-badge"></i> Dashboard

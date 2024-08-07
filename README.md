@@ -34,8 +34,8 @@ The website is available from two perspectives: client and librarian.
 
 1. **Clone the Repository**:
    ```bash
-   git clone [repository_url]
-   cd [repository_name]
+   git clone [https://github.com/MrElyazid/LibraryManagementSystem.git]
+   cd [LibraryManagementSystem]
    ```
 
 2. **Install Dependencies**:
@@ -43,7 +43,7 @@ The website is available from two perspectives: client and librarian.
    composer install
    ```
 
-3. **Configure the `.env` File** with your database credentials:
+3. **Configure the `.env` File** with database credentials:
    ```bash
    DB_HOST=localhost
    DB_PORT=3306
@@ -52,7 +52,7 @@ The website is available from two perspectives: client and librarian.
    DB_PASSWORD=your_database_password
    ```
 
-4. **Run Migrations** to populate the database:
+4. **Run Migrations**:
    ```bash
    php artisan migrate
    ```
@@ -71,7 +71,7 @@ The website is available from two perspectives: client and librarian.
    ```
 
 6. **Serve the Application**:
-   Ensure your database is running, then start the server:
+   make sure the  database is up and running, then start the server:
    ```bash
    php artisan serve
    ```
@@ -86,6 +86,37 @@ The website is available from two perspectives: client and librarian.
      ```bash
      php artisan db:import --ignore-auto-increment
      ```
-   - Download the images folder from [link], decompress it, and place it at `storage/app/public`.
+   - Download the images folder from [https://drive.google.com/file/d/1wXHFYNlLC8emqIPJsGTnUvOa9Pi4A8dW/view?usp=sharing], decompress it, and place it at `storage/app/public`.
 
 
+## Website Screenshots
+
+### Homepage
+![Homepage](https://drive.google.com/file/d/1tCjL9i9uKAB0vsRuAxnD1SURDsiUFssB/view?usp=sharing)
+
+### Books page
+![Books](https://drive.google.com/file/d/1mVZOEzwue3FKCmHF78b5x6i8QmfoLH94/view?usp=sharing)
+
+### backpack
+![backpack](https://drive.google.com/file/d/1R4GAjLh70bGVLd6-Qj4AjtZblobth-US/view?usp=sharing)
+
+### wishlist
+![wishlist](https://drive.google.com/file/d/1NGXO6zf2wnhW6OC7VpunK1jhgxclCTxw/view?usp=sharing)
+
+### categories
+![categories](https://drive.google.com/file/d/1lC0S4ghUjYvFUJKp5_dtkqcGIhLckQtw/view?usp=sharing)
+
+### Authors
+![authors](https://drive.google.com/file/d/1BjLj5NovLnXApM2awZ2fdbgS6P-J1G_e/view?usp=sharing)
+
+### book page 
+![book](https://drive.google.com/file/d/1HaFSMW4HyYgHEub9t3oQHspQ41TYU26t/view?usp=sharing)
+
+### loan form
+![loanForm](https://drive.google.com/file/d/1Fpz4-umXIC38pDp2FtKXyG6ZRduA0i-8/view?usp=sharing)
+
+### clients
+![clients](https://drive.google.com/file/d/14pfUKOq0mFK9yfUmckxwSd7W1jz782XO/view?usp=sharing)
+
+### dashboard
+![dashboard](https://drive.google.com/file/d/1tBVyKfA0nehcDJf5PN3SEUuj4Ruq8Cib/view?usp=sharing)

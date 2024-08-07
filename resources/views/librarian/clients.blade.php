@@ -13,8 +13,8 @@
         .dashboard-container {
             background-color: #ffffff;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            padding: 30px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            padding: 40px;
             margin-top: 30px;
         }
         .table-responsive {
@@ -24,9 +24,10 @@
             white-space: nowrap;
         }
         .table thead th {
-            background-color: #f8f9fa;
-            color: #495057;
+            background-color: #007bff;
+            color: #ffffff;
             font-weight: 600;
+            text-align: center;
         }
         .table-hover tbody tr:hover {
             background-color: #f1f3f5;
@@ -34,6 +35,22 @@
         .btn-inspect {
             padding: 0.25rem 0.5rem;
             font-size: 0.875rem;
+        }
+        h1 {
+            color: #007bff;
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .table th, .table td {
+            vertical-align: middle;
+            text-align: center;
+        }
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            padding: 20px;
+            color: #6c757d;
         }
     </style>
 </head>
@@ -74,6 +91,9 @@
                     @endforeach
                 </tbody>
             </table>
+        </div>
+        <div class="footer">
+            <p>&copy; {{ date('Y') }} Library Management System. All Rights Reserved.</p>
         </div>
     </div>
 

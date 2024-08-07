@@ -10,7 +10,56 @@
     <title>Statistics</title>
 </head>
 
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin-top: 20px;
+            margin-left: 30px;
+            margin-right: 30px;
+        }
+    
+        h1, h5 {
+            color: #343a40;
+        }
+    
+        h1 {
+            margin-bottom: 20px;
+        }
+    
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            box-sizing: border-box;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+        }
+    
+        .card-title {
+            margin-bottom: 10px;
+        }
+    
+        .card-text {
+            color: #6f6f6f;
+        }
+    
+        .mb-4 {
+            margin-bottom: 20px;
+        }
+    
+        .mb-3 {
+            margin-bottom: 15px;
+        }
+    
+        canvas {
+            max-width: 100%;
+            height: auto;
+        }
 
+        #topAuthorDiv {
+            width: 45%;
+        }
+    </style>
+    
 <body>
 
     @php
@@ -35,7 +84,7 @@
     <div class="container">
         <h1 class="mb-4">Librarian Dashboard</h1>
         
-        <!-- Simple Statistics -->
+        
         <div class="row mb-4">
             <div class="col-md-4">
                 <div class="card">
@@ -84,7 +133,7 @@
         </div>
     
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Top 5 Authors with Most Books</h5>
