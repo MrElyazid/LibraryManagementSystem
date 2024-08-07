@@ -116,9 +116,15 @@ The website is available from two perspectives: client and librarian.
 ### Loans
 ![Loans](https://drive.google.com/uc?export=view&id=1KMVjYZ0DjYqe_F2YPEp2_zbBMHd7gbOQ)
 
+### Librarian book page
+![Edit Book](https://drive.google.com/uc?export=view&id=18Un6iTXeYnqETFB_ZoNjziXvvzC62-OG)
+
 ### Add Book
 ![Add Book](https://drive.google.com/uc?export=view&id=1VSSVCoX3jzq-HsGWRQSstSOXXr3W9ikh)
 
+### Edit book
+![Edit Book](https://drive.google.com/uc?export=view&id=17PYL52oknZv2_5EYe4uqIyGlMZZGv3HR)
+
 
 # Notes : 
-The website isnt complete, nor does it follow all the best laravel practices, has many spaghetti codes and bugs and some functionalities are not yet implemneted ( fine calculation for late book returns, setting a max number of loans... etc ) this is an early version of it and ( i hope ) i can work more on it in the future.
+The website isnt complete, nor does it follow all the best laravel practices, has many spaghetti codes and bugs and some functionalities are not yet implemneted ( fine calculation for late book returns, setting a max number of loans, increasing loans for students ... etc ) this is an early version of it and ( i hope ) i can work more on it in the future.
