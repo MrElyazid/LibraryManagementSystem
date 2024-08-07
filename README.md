@@ -92,31 +92,31 @@ The website is available from two perspectives: client and librarian.
 ## Website Screenshots
 
 ### Homepage
-![Homepage](https://drive.google.com/file/d/1tCjL9i9uKAB0vsRuAxnD1SURDsiUFssB/view?usp=sharing)
+![Homepage](https://drive.google.com/uc?export=view&id=1tCjL9i9uKAB0vsRuAxnD1SURDsiUFssB)
 
 ### Books page
-![Books](https://drive.google.com/file/d/1mVZOEzwue3FKCmHF78b5x6i8QmfoLH94/view?usp=sharing)
+![Books](https://drive.google.com/uc?export=view&id=1mVZOEzwue3FKCmHF78b5x6i8QmfoLH94)
 
-### backpack
-![backpack](https://drive.google.com/file/d/1R4GAjLh70bGVLd6-Qj4AjtZblobth-US/view?usp=sharing)
+### Backpack
+![Backpack](https://drive.google.com/uc?export=view&id=1R4GAjLh70bGVLd6-Qj4AjtZblobth-US)
 
-### wishlist
-![wishlist](https://drive.google.com/file/d/1NGXO6zf2wnhW6OC7VpunK1jhgxclCTxw/view?usp=sharing)
+### Wishlist
+![Wishlist](https://drive.google.com/uc?export=view&id=1NGXO6zf2wnhW6OC7VpunK1jhgxclCTxw)
 
-### categories
-![categories](https://drive.google.com/file/d/1lC0S4ghUjYvFUJKp5_dtkqcGIhLckQtw/view?usp=sharing)
+### Categories
+![Categories](https://drive.google.com/uc?export=view&id=1lC0S4ghUjYvFUJKp5_dtkqcGIhLckQtw)
 
 ### Authors
-![authors](https://drive.google.com/file/d/1BjLj5NovLnXApM2awZ2fdbgS6P-J1G_e/view?usp=sharing)
+![Authors](https://drive.google.com/uc?export=view&id=1BjLj5NovLnXApM2awZ2fdbgS6P-J1G_e)
 
-### book page 
-![book](https://drive.google.com/file/d/1HaFSMW4HyYgHEub9t3oQHspQ41TYU26t/view?usp=sharing)
+### Book page
+![Book](https://drive.google.com/uc?export=view&id=1HaFSMW4HyYgHEub9t3oQHspQ41TYU26t)
 
-### loan form
-![loanForm](https://drive.google.com/file/d/1Fpz4-umXIC38pDp2FtKXyG6ZRduA0i-8/view?usp=sharing)
+### Loan form
+![Loan Form](https://drive.google.com/uc?export=view&id=1Fpz4-umXIC38pDp2FtKXyG6ZRduA0i-8)
 
-### clients
-![clients](https://drive.google.com/file/d/14pfUKOq0mFK9yfUmckxwSd7W1jz782XO/view?usp=sharing)
+### Clients
+![Clients](https://drive.google.com/uc?export=view&id=14pfUKOq0mFK9yfUmckxwSd7W1jz782XO)
 
-### dashboard
-![dashboard](https://drive.google.com/file/d/1tBVyKfA0nehcDJf5PN3SEUuj4Ruq8Cib/view?usp=sharing)
+### Dashboard
+![Dashboard](https://drive.google.com/uc?export=view&id=1tBVyKfA0nehcDJf5PN3SEUuj4Ruq8Cib)
