@@ -111,19 +111,19 @@ body {
             <div class="col-md-4 book-cover-container">
                 <img src="{{ asset('storage/images/covers/' . $book->image) }}" alt="Book Cover" class="book-cover img-fluid">
                 
-                
                 @if(Auth::check() && Auth::user()->isLibrarian())
                 <a class="edit-button btn btn-warning mt-3" href="{{ route('librarian.editBook', ['id' => $book->id_book]) }}">Edit</a>
                 <button type="button" class="remove-button btn btn-danger mt-2" onclick="confirmDelete({{ $book->id_book }})">Remove</button>
             @else
-
 
             @php
             $isWishlisted = Auth::check() ? Auth::user()->wishlists()->where('book', $book->id_book)->exists() : false;
             $isloanable = $book->quantity === 0 || $book->status !== 'Available';
         @endphp
 
-                @if ($isloanable)
+                @if ($alreadyLoaned)
+                <button class="loan-button btn btn-info mt-3" disabled>You already loaned this book</button>
+                @elseif ($isloanable)
                 <button class="loan-button btn btn-info mt-3" disabled>Not available for loan</button>
                 @else
             <a class="loan-button btn btn-primary mt-3 loannn" href="{{ route('loans.create', ['book' => $book->id_book]) }}">Loan</a>
@@ -136,7 +136,6 @@ body {
                 @endif
 
                 @endif
-
 
             </div>
             <div class="col-md-8 book-info-container">
@@ -183,6 +182,6 @@ function confirmDelete(bookId) {
 }
 </script>
 
-    </body>
+</body>
 </html>
 

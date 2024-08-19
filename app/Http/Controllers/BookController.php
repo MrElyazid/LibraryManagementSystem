@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Loan;
 use App\Models\Author;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class BookController extends Controller
 {
@@ -59,7 +61,18 @@ class BookController extends Controller
         abort(404, 'Book not found');
     }
 
-    return view('book', compact('book'));
+    $user = Auth::user();
+    
+    $alreadyLoaned = false;
+    if ($user) {
+        $alreadyLoaned = Loan::where('client', $user->id_client)
+                             ->where('book', $book->id_book)
+                             ->whereNull('return_date')
+                             ->exists();
+    }
+
+    
+    return view('book', compact('book', 'alreadyLoaned'));
 }
 
 

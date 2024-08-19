@@ -23,9 +23,6 @@
             max-width: 380px;
             padding: 15px;
             margin: auto;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
         .form-signin .form-control {
@@ -87,7 +84,6 @@
 </form>
 </div>
     
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+Pk8ewPfaC6HgHDUw0XcOJy5iP0dX" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -58,6 +58,11 @@
         #topAuthorDiv {
             width: 45%;
         }
+
+        #formParent {
+        
+            text-align: center;
+        }
     </style>
     
 <body>
@@ -82,8 +87,18 @@
 
 
     <div class="container">
-        <h1 class="mb-4">Librarian Dashboard</h1>
         
+        
+        <div id="formParent" class="my-4 container">
+            <div class="d-flex align-items-center justify-content-between">
+              <h1 class="mb-4">Librarian Dashboard</h1>
+              <form action="{{ route('logout') }}" method="POST">
+                @csrf
+                <button type="submit" class="btn btn-danger logout-button mb-5">Disconnect</button>
+              </form>
+            </div>
+          </div>
+          
         
         <div class="row mb-4">
             <div class="col-md-4">
@@ -151,6 +166,10 @@
             </div>
         </div>
     </div>
+
+
+
+
 
     @push('scripts')
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

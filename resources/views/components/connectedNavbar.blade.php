@@ -2,7 +2,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
     <div class="container-fluid">
         <a class="navbar-brand" href="{{ route('home')}}">
-            <img src="{{ asset('images/brand.png') }}" alt="Brand" style="height: 50px;"> <!-- Adjusted height -->
+            <img src="{{ asset('images/brand.png') }}" alt="Brand" style="height: 50px;">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavConnected" aria-controls="navbarNavConnected" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -42,7 +42,7 @@
     </div>
 </nav>
 
-<!-- Custom CSS for navbar styling -->
+
 <style>
     .navbar-brand img {
         transition: transform 0.2s ease-in-out !important;
@@ -56,13 +56,13 @@
         color: #555 !important;
         display: flex;
         align-items: center;
-        font-size: 1.25rem; /* Adjusted font size */
-        padding: 10px 20px; /* Adjusted padding */
+        font-size: 1.25rem;
+        padding: 10px 20px;
     }
 
     .nav-item .nav-link i {
-        margin-right: 10px; /* Adjusted margin */
-        font-size: 1.5rem; /* Adjusted icon size */
+        margin-right: 10px;
+        font-size: 1.5rem;
     }
 
     .nav-item .nav-link:hover {
@@ -73,13 +73,13 @@
         display: flex;
         align-items: center;
         margin-left: auto;
-        font-size: 1.25rem; /* Adjusted font size */
-        padding: 10px 20px; /* Adjusted padding */
+        font-size: 1.25rem;
+        padding: 10px 20px;
     }
 
     .nav-link.btn-outline-secondary i {
-        margin-right: 10px; /* Adjusted margin */
-        font-size: 1.5rem; /* Adjusted icon size */
+        margin-right: 10px;
+        font-size: 1.5rem;
     }
 
     .navbar-toggler-icon {
@@ -89,13 +89,18 @@
     @media (max-width: 992px) {
         .nav-item .nav-link {
             text-align: center;
-            font-size: 1.1rem; /* Adjust font size for smaller screens */
-            padding: 8px 0; /* Adjust padding for smaller screens */
+            font-size: 1.1rem;
+            padding: 8px 0;
         }
 
         .nav-link.btn-outline-secondary {
-            font-size: 1.1rem; /* Adjust font size for smaller screens */
-            padding: 8px 16px; /* Adjust padding for smaller screens */
+            font-size: 1.1rem;
+            padding: 8px 16px; 
         }
     }
+
+    .navbar-toggler:focus {
+    outline: none;
+    box-shadow: none;
+}
 </style>

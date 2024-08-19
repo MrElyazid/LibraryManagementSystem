@@ -34,7 +34,6 @@ Route::get('/books/search', [BookController::class, 'search'])->name('books.sear
 Route::get('/authors', [AuthorController::class, 'index'])->name('authors.index');
 
 Route::get('/books/{id}', [BookController::class, 'show'])->name('books.show');
-
 Route::post('/logout', function () {
     Auth::logout();
     return redirect('/login');
@@ -60,11 +59,8 @@ Route::prefix('librarian')->group(function(){
 });
 
 Route::put('/librarian/book/{id}', [BookController::class, 'update'])->name('librarian.updateBook');
-
 Route::get('/librarian/addBook', [BookController::class, 'addBookForm'])->name('librarian.addBookForm');
 Route::post('/librarian/addBook', [BookController::class, 'addBook'])->name('librarian.addBook');
-
-
 
 
 Route::get('/librarian/loans', [LoanController::class, 'index'])->name('librarian.loans');

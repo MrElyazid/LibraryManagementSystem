@@ -66,6 +66,7 @@
     </style>
     <title>Loan a Book</title>
 </head>
+
 <body>
     @if(Auth::check())
         @if(Auth::user()->isLibrarian())
@@ -98,6 +99,10 @@
                             <div class="alert alert-info" role="alert">
                                 You've already loaned this book. Check your backpack!
                             </div>
+                        @elseif($maxReached)
+                            <div class="alert alert-danger" role="alert">
+                                You've reached your maximum number of loans. Return books to the library staff to loan again.
+                            </div>
                         @else
                             <form method="POST" action="{{ route('loans.store') }}" class="text-center">
                                 @csrf
@@ -108,11 +113,10 @@
                                     <option value="2">2 weeks of wisdom</option>
                                     <option value="3">3 weeks of enlightenment</option>
                                 </select>
-                                <button type="submit" class="btn submit-button">Begin Your Adventure!</button>
+                                <button type="submit" class="btn submit-button" id="submitButton">Begin Your Adventure!</button>
                             </form>
                         @endif
                     </div>
-                    
                 </div>
             </div>
         </div>
@@ -120,5 +124,19 @@
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
+<script>
+    document.getElementById('loanForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const form = this;
+
+        
+        form.submit();
+
+        
+        setTimeout(function() {
+            location.reload();
+        }, 1000);
+    });
+</script>
 </body>
 </html>

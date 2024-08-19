@@ -104,4 +104,10 @@
             padding: 8px 16px; /* Adjust padding for smaller screens */
         }
     }
+
+
+    .navbar-toggler:focus {
+    outline: none;
+    box-shadow: none;
+}
 </style>

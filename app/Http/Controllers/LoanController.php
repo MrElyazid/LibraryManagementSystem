@@ -34,7 +34,9 @@ class LoanController extends Controller
                              ->whereNull('return_date')
                              ->exists();
 
-        return view('loans.create', compact('book', 'alreadyLoaned'));
+        $loanCount = Loan::where('client', $user->id_client)->whereNull('return_date')->count();
+        $maxReached = $loanCount >= 5;
+        return view('loans.create', compact('book', 'alreadyLoaned', 'maxReached'));
     }
 
     public function store(Request $request)
@@ -50,6 +52,10 @@ class LoanController extends Controller
         $loan->date_borrowed = $borrowDate;
         $loan->due_date = $dueDate;
         $loan->save();
+
+
+        $book->quantity -= 1;
+        $book->save();
 
         return $this->generateReceipt($loan);
     }
@@ -130,6 +136,7 @@ public function export($format)
     return back()->with('error', 'Unsupported export format');
 }
 
+
 private function exportToCsv($loans)
 {
     $headers = [
@@ -169,13 +176,19 @@ private function exportToPdf($loans)
 public function returnBook($loanId)
 {
     $loan = Loan::findOrFail($loanId);
-    
+
     if ($loan->return_date) {
         return response()->json(['success' => false, 'message' => 'This book has already been returned.'], 400);
     }
 
+    
     $loan->return_date = now();
     $loan->save();
+
+    
+    $book = $loan->book;
+    $book->quantity += 1;
+    $book->save();
 
     return response()->json(['success' => true, 'message' => 'Book returned successfully.']);
 }

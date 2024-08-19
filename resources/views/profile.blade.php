@@ -63,6 +63,7 @@
             <p><strong>Last Name:</strong> {{ $client->lastname }}</p>
             <p><strong>Join Date:</strong> {{ date('F d, Y', strtotime($client->created_at)) }}</p>
             <p><strong>Total Books Loaned:</strong> {{ $totalBooksLoaned }}</p>
+            <p><strong>You can still loan :</strong> {{ 5 - $loanCount }} books</p>
         </div>
         <form action="{{ route('logout') }}" method="POST">
             @csrf

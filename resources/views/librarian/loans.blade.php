@@ -104,7 +104,7 @@
 
                                 @if(!$loan->return_date)
                 <button class="btn btn-sm btn-success" onclick="showReturnModal({{ $loan->id_loan }})">
-                    Return Book
+                    Mark as Returned
                 </button>
             @endif
                             </div>
